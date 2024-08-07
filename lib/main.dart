@@ -1,4 +1,4 @@
-import 'package:bliu/screen/home_screen.dart';
+import 'package:bliu/screen/home/home_page.dart';
 import 'package:bliu/screen/on_boarding_screen.dart';
 import 'package:bliu/utils/permission_manager.dart';
 import 'package:bliu/utils/utils.dart';

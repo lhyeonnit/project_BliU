@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bliu/screen/home_screen.dart';
+import 'package:bliu/screen/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -109,23 +109,16 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                         color: Colors.white,
                         alignment: Alignment.topRight,
                         height: 58,
-                        margin: const EdgeInsets.only(right: 16),
                         child: SizedBox(
-                          width: 88,
+                          width: 100,
                           height: 38,
                           child: InkWell(
                             onTap: () {
-                              if (_currentPage == 2) {
-                                Navigator.pop(context);
-                                Get.to(() => const HomeScreen());
-                              } else {
-                                _communityPageController.nextPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeIn,
-                                );
-                              }
+                              Navigator.pop(context);
+                              Get.to(() => const MainPage());
                             },
                             child: Container(
+                              margin: EdgeInsets.only(right: 15),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(19),
