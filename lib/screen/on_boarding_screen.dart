@@ -73,7 +73,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                           color: Colors.white, // 배경색을 흰색으로 설정
                           child: Align(
                             alignment: Alignment.topCenter, // 상단 중앙에 맞추기
-                            child: Image.asset(imagePath),
+                            child: Image.asset(imagePath,width: 412,height: 660,),
                           ),
                         );
                       },
@@ -81,6 +81,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 SizedBox(
                   height: 100,
+                  width: 412,
                   child: Column(
                     children: [
                       Expanded(
@@ -110,15 +111,15 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                         alignment: Alignment.topRight,
                         height: 58,
                         child: SizedBox(
-                          width: 100,
-                          height: 38,
                           child: InkWell(
                             onTap: () {
                               Navigator.pop(context);
                               Get.to(() => const MainPage());
                             },
                             child: Container(
-                              margin: EdgeInsets.only(right: 15),
+                              width: 88,
+                              height: 38,
+                              margin: EdgeInsets.only(right: 16),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(19),

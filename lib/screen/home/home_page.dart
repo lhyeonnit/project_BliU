@@ -1,4 +1,10 @@
 
+import 'package:bliu/screen/home/component/home_body_ai.dart';
+import 'package:bliu/screen/home/component/home_body_best_seles.dart';
+import 'package:bliu/screen/home/component/home_body_category.dart';
+import 'package:bliu/screen/home/component/home_body_exhibition.dart';
+import 'package:bliu/screen/home/component/home_footer.dart';
+import 'package:bliu/screen/home/component/home_header.dart';
 import 'package:flutter/material.dart';
 
 
@@ -7,7 +13,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        children: [
+          HomeHeader(),
+          HomeBodyCategory(),
+          HomeBodyAi(),
+          HomeBodyExhibition(),
+          HomeBodyBestSeles(),
+          HomeFooter(),
+        ],
+      ),
+    );
   }
 }
 
