@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:bliu/widget/main_exhibition_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -113,24 +113,39 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
         items: [
           BottomNavigationBarItem(
             // 현재 아이콘이 선택된 아이콘일때와 선택된 아이콘이 아닌 경우 Icon을 다르게 하기 위함
-              icon: _selectedIndex == 0? Icon(Icons.home_filled, color: Colors.black,): Icon(Icons.home_outlined, color: Colors.black),
-              label: 'home'
+              icon: SvgPicture.asset(
+                'assets/images/home/bottom_home.svg',
+                color: _selectedIndex == 0 ? Colors.black : Colors.grey,
+              ),
+            label: 'home',
           ),
           BottomNavigationBarItem(
-              icon: _selectedIndex == 1? Icon(Icons.search, color: Colors.black,):  Icon(Icons.search_off, color: Colors.black,),
-              label: 'search'
+                icon: SvgPicture.asset(
+                  'assets/images/home/bottom_like.svg',
+                  color: _selectedIndex == 1 ? Colors.black : Colors.grey,
+              ),
+              label: 'like'
           ),
           BottomNavigationBarItem(
-              icon: _selectedIndex == 2? Icon(Icons.shopping_bag, color: Colors.black,): Icon(Icons.shopping_bag_outlined, color: Colors.black),
-              label: 'media'
+                icon: SvgPicture.asset(
+                  'assets/images/home/bottom_store.svg',
+                  color: _selectedIndex == 2 ? Colors.black : Colors.grey,
+              ),
+              label: 'store'
           ),
           BottomNavigationBarItem(
-              icon: _selectedIndex == 3? Icon(Icons.movie, color: Colors.black,): Icon(Icons.movie_outlined, color: Colors.black,),
-              label: 'shop'
+                icon: SvgPicture.asset(
+                  'assets/images/home/bottom_cate.svg',
+                  color: _selectedIndex == 3 ? Colors.black : Colors.grey,
+              ),
+              label: 'cate'
           ),
           BottomNavigationBarItem(
-              icon: _selectedIndex == 4? Icon(Icons.person, color: Colors.black): Icon(Icons.person_outline, color: Colors.black,),
-              label: 'profile'
+                icon: SvgPicture.asset(
+                  'assets/images/home/bottom_my.svg',
+                  color: _selectedIndex == 4 ? Colors.black : Colors.grey,
+              ),
+              label: 'my'
           )
         ],
         currentIndex: _selectedIndex,
