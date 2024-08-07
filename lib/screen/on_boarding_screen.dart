@@ -21,11 +21,17 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   // bool _visible = true;
   // double _fade = 1;
 
-  final communityPageController = PageController();
+  final PageController _communityPageController = PageController();
+  int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
+    _communityPageController.addListener(() {
+      setState(() {
+        _currentPage = _communityPageController.page?.round() ?? 0;
+      });
+    });
   }
 
   @override
@@ -44,23 +50,34 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
             child: Column(
               children: [
                 Expanded(
-                  flex: 66,
-                  child: PageView.builder(
-                    scrollDirection: Axis.horizontal,
-                    controller: communityPageController,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      // TODO 뷰 만들기
-                      var color = Colors.red;
-                      if (index == 1) {
-                        color = Colors.brown;
-                      }
-                      return Container(
-                        color: color,
-                      );
-                    }
-                  )
+                    flex: 66,
+                    child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      controller: _communityPageController,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        String imagePath = '';
+                        switch (index) {
+                          case 0:
+                            imagePath = 'assets/images/onbImg01.png';
+                            break;
+                          case 1:
+                            imagePath = 'assets/images/onbImg02.png';
+                            break;
+                          case 2:
+                            imagePath = 'assets/images/onbImg03.png';
+                            break;
+                        }
+                        return Container(
+                          color: Colors.white, // 배경색을 흰색으로 설정
+                          child: Align(
+                            alignment: Alignment.topCenter, // 상단 중앙에 맞추기
+                            child: Image.asset(imagePath),
+                          ),
+                        );
+                      },
+                    )
                 ),
                 SizedBox(
                   height: 100,
@@ -69,25 +86,27 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                       Expanded(
                         flex: 1,
                         child: Container(
+                          color: Colors.white,
                           width: double.infinity,
                           alignment: Alignment.center,
                           child: SmoothPageIndicator(
-                            controller: communityPageController,
-                            count: 4,
-                            effect: const ScrollingDotsEffect(
-                              activeDotColor: Colors.indigoAccent,
-                              activeStrokeWidth: 10,
-                              activeDotScale: 1.5,
-                              maxVisibleDots: 5,
-                              radius: 8,
-                              spacing: 10,
-                              dotHeight: 4,
-                              dotWidth: 4,
-                            )
+                              controller: _communityPageController,
+                              count: 3,
+                              effect: const ScrollingDotsEffect(
+                                activeDotColor: Colors.indigoAccent,
+                                activeStrokeWidth: 10,
+                                activeDotScale: 1.5,
+                                maxVisibleDots: 5,
+                                radius: 8,
+                                spacing: 10,
+                                dotHeight: 4,
+                                dotWidth: 4,
+                              )
                           ),
                         ),
                       ),
                       Container(
+                        color: Colors.white,
                         alignment: Alignment.topRight,
                         height: 58,
                         margin: const EdgeInsets.only(right: 16),
@@ -96,8 +115,15 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                           height: 38,
                           child: InkWell(
                             onTap: () {
-                              Navigator.pop(context);
-                              Get.to(() => const HomeScreen());
+                              if (_currentPage == 2) {
+                                Navigator.pop(context);
+                                Get.to(() => const HomeScreen());
+                              } else {
+                                _communityPageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeIn,
+                                );
+                              }
                             },
                             child: Container(
                               alignment: Alignment.center,
@@ -108,16 +134,14 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                                   color: const Color(0xffDDDDDD),
                                 ),
                               ),
-                              child: const Text(
-                                "건너뛰기",
-                                style: TextStyle(
-                                  fontSize: 14
-                                ),
+                              child: Text(
+                                _currentPage == 2 ? "다음" : "건너뛰기",
+                                style: const TextStyle(fontSize: 14),
                               ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )
@@ -170,3 +194,4 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     }
   }
 }
+

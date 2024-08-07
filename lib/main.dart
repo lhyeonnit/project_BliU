@@ -1,4 +1,5 @@
 import 'package:bliu/screen/home_screen.dart';
+import 'package:bliu/screen/on_boarding_screen.dart';
 import 'package:bliu/utils/permission_manager.dart';
 import 'package:bliu/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      home: HomeScreen(),
+      home: OnBoardingScreen(),
     );
   }
 }
