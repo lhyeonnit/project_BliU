@@ -18,14 +18,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   DateTime? _backButtonPressedTime;
   int _selectedIndex = 2;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   final List<Widget> _widgetOptions = <Widget>[
     StorePage(),
@@ -41,28 +35,10 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: PopScope(
-        canPop: false,
-        onPopInvoked: (bool didPop) {
-          _backPressed();
-        },
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
-    );
-  }
-
   Future<void> _backPressed() async {
-    if (Platform.isAndroid) { // 안드로이드 경우일때만
+    if (Platform.isAndroid) {
       DateTime currentTime = DateTime.now();
 
-      //Statement 1 Or statement2
       bool backButton = _backButtonPressedTime == null ||
           currentTime.difference(_backButtonPressedTime!) > const Duration(seconds: 3);
 
@@ -79,5 +55,22 @@ class _MainPageState extends State<MainPage> {
 
       SystemNavigator.pop();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        await _backPressed();
+        return false;
+      },
+      child: Scaffold(
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: CustomBottomNavigationBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        ),
+      ),
+    );
   }
 }
