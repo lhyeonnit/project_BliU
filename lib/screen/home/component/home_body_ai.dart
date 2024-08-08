@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomeBodyAi extends StatelessWidget {
   final List<Map<String, dynamic>> products = [
     {
-      'image': 'assets/images/home/product1.png',
+      'image': 'assets/images/home/exhi.png',
       'brand': '작은숲길',
       'name': '우이동금손 안나 토션 레이스 베스트',
       'discount': '15%',
@@ -13,7 +13,7 @@ class HomeBodyAi extends StatelessWidget {
       'liked': false,
     },
     {
-      'image': 'assets/images/home/product2.png',
+      'image': 'assets/images/home/exhi.png',
       'brand': '무지개씨앗',
       'name': '우이동금손 바디수트',
       'discount': '10%',
@@ -23,7 +23,7 @@ class HomeBodyAi extends StatelessWidget {
       'liked': true,
     },
     {
-      'image': 'assets/images/home/product3.png',
+      'image': 'assets/images/home/exhi.png',
       'brand': '타이니숍',
       'name': '밀크마일 원 균일가',
       'discount': '15%',
@@ -52,7 +52,7 @@ class HomeBodyAi extends StatelessWidget {
             ),
           ),
           Container(
-            height: 250.0,
+            height: 300.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: products.length,

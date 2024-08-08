@@ -45,7 +45,7 @@ class HomeBodyExhibition extends StatelessWidget {
 
   Widget buildExhibitionCard(Map<String, dynamic> exhibition) {
     return Container(
-      width: 300.0,
+      width: 400.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
