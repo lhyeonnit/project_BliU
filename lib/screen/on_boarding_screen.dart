@@ -24,7 +24,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _communityPageController = PageController();
   int _currentPage = 0;
 
-    @override
+  @override
   void initState() {
     super.initState();
     _communityPageController.addListener(() {
