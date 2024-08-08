@@ -36,9 +36,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   Future<void> _backPressed() async {
-    if (Platform.isAndroid) {
+    if (Platform.isAndroid) { // 안드로이드 경우일때만
       DateTime currentTime = DateTime.now();
 
+      //Statement 1 Or statement2
       bool backButton = _backButtonPressedTime == null ||
           currentTime.difference(_backButtonPressedTime!) > const Duration(seconds: 3);
 
@@ -59,18 +60,12 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        await _backPressed();
-        return false;
-      },
-      child: Scaffold(
+    return Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: CustomBottomNavigationBar(
           selectedIndex: _selectedIndex,
           onItemTapped: _onItemTapped,
         ),
-      ),
-    );
+      );
   }
 }
