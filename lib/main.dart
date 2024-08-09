@@ -1,5 +1,6 @@
 import 'package:bliu/screen/category/category_page.dart';
 import 'package:bliu/screen/home/home_page.dart';
+import 'package:bliu/screen/like/like_page.dart';
 import 'package:bliu/screen/main_page.dart';
 import 'package:bliu/screen/on_boarding_screen.dart';
 import 'package:bliu/utils/permission_manager.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CategoryPage(),
+      home: LikePage(),
     );
   }
 }
