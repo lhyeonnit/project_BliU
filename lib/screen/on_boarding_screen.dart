@@ -14,13 +14,6 @@ class OnBoardingScreen extends StatefulWidget {
 
 class OnBoardingScreenState extends State<OnBoardingScreen> {
   DateTime? _backButtonPressedTime;
-  // final Image _splashImage = Image.asset(
-  //   'assets/splash/splash.png',
-  //   fit: BoxFit.fitHeight,
-  // );
-  // bool _visible = true;
-  // double _fade = 1;
-
   final PageController _communityPageController = PageController();
   int _currentPage = 0;
 
@@ -37,131 +30,107 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PopScope(
-        canPop: false,
-        onPopInvoked: (bool didPop){
-          //print("didPop ---> ${didPop}");
-          if (!didPop) {
-            _backPressed();
-          }
-        },
-        child: Stack(children: <Widget>[
-          SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                    flex: 66,
-                    child: PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      controller: _communityPageController,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        String imagePath = '';
-                        switch (index) {
-                          case 0:
-                            imagePath = 'assets/images/onbImg01.png';
-                            break;
-                          case 1:
-                            imagePath = 'assets/images/onbImg02.png';
-                            break;
-                          case 2:
-                            imagePath = 'assets/images/onbImg03.png';
-                            break;
-                        }
-                        return Container(
-                          color: Colors.white, // 배경색을 흰색으로 설정
-                          child: Align(
-                            alignment: Alignment.topCenter, // 상단 중앙에 맞추기
-                            child: Image.asset(imagePath,width: 412,height: 660,),
-                          ),
-                        );
-                      },
-                    )
+      body: Stack(children: <Widget>[
+        SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                flex: 66,
+                child: PageView.builder(
+                  scrollDirection: Axis.horizontal,
+                  controller: _communityPageController,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    String imagePath = '';
+                    switch (index) {
+                      case 0:
+                        imagePath = 'assets/images/onbImg01.png';
+                        break;
+                      case 1:
+                        imagePath = 'assets/images/onbImg02.png';
+                        break;
+                      case 2:
+                        imagePath = 'assets/images/onbImg03.png';
+                        break;
+                    }
+                    return Container(
+                      color: Colors.white, // 배경색을 흰색으로 설정
+                      child: Align(
+                        alignment: Alignment.topCenter, // 상단 중앙에 맞추기
+                        child: Image.asset(
+                          imagePath,
+                          width: 412,
+                          height: 660,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                SizedBox(
-                  height: 100,
-                  width: 412,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.white,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: SmoothPageIndicator(
-                              controller: _communityPageController,
-                              count: 3,
-                              effect: const ScrollingDotsEffect(
-                                activeDotColor: Colors.indigoAccent,
-                                activeStrokeWidth: 10,
-                                activeDotScale: 1.5,
-                                maxVisibleDots: 5,
-                                radius: 8,
-                                spacing: 10,
-                                dotHeight: 4,
-                                dotWidth: 4,
-                              )
+              ),
+              SizedBox(
+                height: 100,
+                width: 412,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        color: Colors.white,
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: SmoothPageIndicator(
+                          controller: _communityPageController,
+                          count: 3,
+                          effect: const ScrollingDotsEffect(
+                            activeDotColor: Colors.indigoAccent,
+                            activeStrokeWidth: 10,
+                            activeDotScale: 1.5,
+                            maxVisibleDots: 5,
+                            radius: 8,
+                            spacing: 10,
+                            dotHeight: 4,
+                            dotWidth: 4,
                           ),
                         ),
                       ),
-                      Container(
-                        color: Colors.white,
-                        alignment: Alignment.topRight,
-                        height: 58,
-                        child: SizedBox(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                              Get.to(() => const MainPage());
-                            },
-                            child: Container(
-                              width: 88,
-                              height: 38,
-                              margin: EdgeInsets.only(right: 16),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(19),
-                                border: Border.all(
-                                  width: 1,
-                                  color: const Color(0xffDDDDDD),
-                                ),
+                    ),
+                    Container(
+                      color: Colors.white,
+                      alignment: Alignment.topRight,
+                      height: 58,
+                      child: SizedBox(
+                        child: InkWell(
+                          onTap: () {
+                            Get.off(() => const MainPage()); // MainPage로 이동하고 온보딩 화면 제거
+                          },
+                          child: Container(
+                            width: 88,
+                            height: 38,
+                            margin: const EdgeInsets.only(right: 16),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(19),
+                              border: Border.all(
+                                width: 1,
+                                color: const Color(0xffDDDDDD),
                               ),
-                              child: Text(
-                                _currentPage == 2 ? "다음" : "건너뛰기",
-                                style: const TextStyle(fontSize: 14),
-                              ),
+                            ),
+                            child: Text(
+                              _currentPage == 2 ? "다음" : "건너뛰기",
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          // AnimatedOpacity(
-          //   duration: const Duration(milliseconds: 500),
-          //   curve: Curves.fastOutSlowIn,
-          //   opacity: _fade,
-          //   onEnd: () {
-          //     if (_visible) {
-          //       //_splashGone();
-          //     }
-          //   },
-          //   child: Visibility(
-          //     visible: _visible,
-          //     child: SizedBox(
-          //       width: double.infinity,
-          //       height: double.infinity,
-          //       child: _splashImage,
-          //     ),
-          //   ),
-          // )
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 
@@ -169,7 +138,6 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     if (Platform.isAndroid) { // 안드로이드 경우일때만
       DateTime currentTime = DateTime.now();
 
-      //Statement 1 Or statement2
       bool backButton = _backButtonPressedTime == null ||
           currentTime.difference(_backButtonPressedTime!) > const Duration(seconds: 3);
 
@@ -188,4 +156,3 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     }
   }
 }
-

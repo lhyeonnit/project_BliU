@@ -9,32 +9,32 @@ class MyPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('마이페이지'),
+        title: const Text('마이페이지'),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications_none),
+            icon: const Icon(Icons.notifications_none),
             onPressed: () {},
           ),
           Stack(
             children: [
               IconButton(
-                icon: Icon(Icons.shopping_bag_outlined),
+                icon: const Icon(Icons.shopping_bag_outlined),
                 onPressed: () {},
               ),
               Positioned(
                 right: 11,
                 top: 11,
                 child: Container(
-                  padding: EdgeInsets.all(2),
+                  padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minWidth: 12,
                     minHeight: 12,
                   ),
-                  child: Text(
+                  child: const Text(
                     '2',
                     style: TextStyle(
                       color: Colors.white,
@@ -58,39 +58,44 @@ class MyPage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: NetworkImage(
+                    backgroundImage: const NetworkImage(
                         'https://example.com/profile_image.png'), // 프로필 이미지 URL을 여기에 추가하세요
+                    // Error handling 추가
+                    onBackgroundImageError: (_, __) {
+                      // 이미지 로딩 실패 시 처리 로직 추가
+                      print("이미지 로딩 실패");
+                    },
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           '김아름님 안녕하세요',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 4),
-                        Text('id1234'),
+                        const SizedBox(height: 4),
+                        const Text('id1234'),
                       ],
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text('내정보수정'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
+                    child: const Text('내정보수정'),
                   ),
                 ],
               ),
             ),
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -103,10 +108,10 @@ class MyPage extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(),
+            const Divider(),
             _buildSection('쇼핑정보'),
             _buildSectionItem('추천정보관리', () {}),
-            Divider(),
+            const Divider(),
             _buildSection('고객서비스'),
             _buildSectionItem('FAQ', () {}),
             _buildSectionItem('공지사항', () {}),
@@ -136,7 +141,7 @@ class MyPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           color: Colors.grey,
         ),
@@ -147,7 +152,7 @@ class MyPage extends StatelessWidget {
   Widget _buildSectionItem(String title, VoidCallback onPressed) {
     return ListTile(
       title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onPressed,
     );
   }
