@@ -3,6 +3,7 @@ import 'package:bliu/screen/home/home_page.dart';
 import 'package:bliu/screen/like/like_page.dart';
 import 'package:bliu/screen/main_page.dart';
 import 'package:bliu/screen/on_boarding_screen.dart';
+import 'package:bliu/screen/store/store_page.dart';
 import 'package:bliu/utils/permission_manager.dart';
 import 'package:bliu/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LikePage(),
+      home: StorePage(),
     );
   }
 }
