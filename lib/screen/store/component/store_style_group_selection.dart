@@ -105,7 +105,7 @@ class _StyleSelectionSheetState extends State<StyleSelectionSheet> {
             color: isSelected ? Colors.pink : Colors.grey,
           ),
         ),
-        backgroundColor: isSelected ? Colors.pink[50] : Colors.white,
+        backgroundColor: Colors.white,
       ),
     );
   }

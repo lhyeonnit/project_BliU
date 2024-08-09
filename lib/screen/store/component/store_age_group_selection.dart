@@ -100,7 +100,7 @@ class _StoreAgeGroupSelectionState extends State<StoreAgeGroupSelection> {
             color: isSelected ? Colors.pink : Colors.grey,
           ),
         ),
-        backgroundColor: isSelected ? Colors.pink[50] : Colors.white,
+        backgroundColor: Colors.white,
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:bliu/screen/home/component/home_body_ai.dart';
-import 'package:bliu/screen/home/component/home_body_best_seles.dart';
+import 'package:bliu/screen/home/component/home_body_best_sales.dart';
 import 'package:bliu/screen/home/component/home_body_category.dart';
 import 'package:bliu/screen/home/component/home_body_exhibition.dart';
 import 'package:bliu/screen/home/component/home_footer.dart';
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                       HomeBodyCategory(),
                       HomeBodyAi(),
                       HomeBodyExhibition(),
-                      HomeBodyBestSeles(),
+                      HomeBodyBestSales(),
                       HomeFooter(),
                     ],
                   ),
