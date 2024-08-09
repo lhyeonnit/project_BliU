@@ -13,7 +13,9 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text('카테고리'),
       ),
       body: Row(
