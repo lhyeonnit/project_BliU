@@ -1,3 +1,4 @@
+import 'package:bliu/screen/_component/search_screen.dart';
 import 'package:bliu/screen/home/component/home_body_ai.dart';
 import 'package:bliu/screen/home/component/home_body_best_sales.dart';
 import 'package:bliu/screen/home/component/home_body_category.dart';
@@ -68,7 +69,14 @@ class _HomePageState extends State<HomePage> {
                         "assets/images/home/ic_top_sch_w.svg",
                         color: _isScrolled ? Colors.black : Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchScreen(),
+                          ),
+                        );
+                      },
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
