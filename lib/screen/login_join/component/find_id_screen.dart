@@ -1,4 +1,4 @@
-//아이디 찾기
+import 'package:bliu/screen/login_join/component/find_id_complete_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -135,7 +135,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MainPage(),
+                    builder: (context) => FindIdCompleteScreen(),
                   ),
                 );
               }

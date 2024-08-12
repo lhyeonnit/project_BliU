@@ -1,5 +1,6 @@
 //로그인
 
+import 'package:bliu/screen/login_join/component/find_password_screen.dart';
 import 'package:bliu/screen/login_join/component/join_agree_screen.dart';
 import 'package:bliu/screen/main_page.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +119,12 @@ class LoginScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     // 비밀번호찾기 버튼 동작
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FindPasswordScreen(),
+                      ),
+                    );
                   },
                   child: Text('비밀번호찾기'),
                 ),
