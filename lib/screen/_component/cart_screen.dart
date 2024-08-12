@@ -110,7 +110,7 @@ class _CartScreenState extends State<CartScreen> {
                             setState(() {
                               _isAllSelected = value!;
                               _selectedItemsCount =
-                              _isAllSelected ? _totalItems : 0;
+                                  _isAllSelected ? _totalItems : 0;
                             });
                           },
                         ),
@@ -161,8 +161,7 @@ class _CartScreenState extends State<CartScreen> {
               ..._cartItems.map((item) {
                 int index = _cartItems.indexOf(item);
                 return Card(
-                  margin:
-                  EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -198,14 +197,12 @@ class _CartScreenState extends State<CartScreen> {
                                 children: [
                                   IconButton(
                                     icon: Icon(Icons.remove),
-                                    onPressed: () =>
-                                        _decrementQuantity(index),
+                                    onPressed: () => _decrementQuantity(index),
                                   ),
                                   Text(item['quantity'].toString()),
                                   IconButton(
                                     icon: Icon(Icons.add),
-                                    onPressed: () =>
-                                        _incrementQuantity(index),
+                                    onPressed: () => _incrementQuantity(index),
                                   ),
                                 ],
                               ),
@@ -255,7 +252,8 @@ class _CartScreenState extends State<CartScreen> {
                                 style: TextStyle(fontSize: 14.0)),
                             Text('총 결제금액 $totalPayment원',
                                 style: TextStyle(
-                                    fontSize: 16.0, fontWeight: FontWeight.bold)),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ),
@@ -265,7 +263,8 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('총 상품 금액', style: TextStyle(fontSize: 16.0)),
-                          Text('$totalPrice원', style: TextStyle(fontSize: 16.0)),
+                          Text('$totalPrice원',
+                              style: TextStyle(fontSize: 16.0)),
                         ],
                       ),
                       SizedBox(height: 8.0),
@@ -294,25 +293,37 @@ class _CartScreenState extends State<CartScreen> {
           ),
           if (!_isAtBottom)
             Positioned(
-              bottom: 0,
+              bottom: 20,
               left: 0,
               right: 0,
               child: Container(
                 color: Colors.white,
                 padding: EdgeInsets.all(16.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('총 상품 금액: $totalPrice원'),
-                    IconButton(
-                      icon: Icon(Icons.expand_less),
-                      onPressed: () {
-                        _scrollController.animateTo(
-                          _scrollController.position.maxScrollExtent,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeOut,
-                        );
-                      },
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('총 상품 금액: ', style: TextStyle(fontSize: 16.0)),
+                            Text('$totalPrice원',
+                                style: TextStyle(fontSize: 16.0)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text('총 배송비: ', style: TextStyle(fontSize: 16.0)),
+                            Text('$shippingCost원',
+                                style: TextStyle(fontSize: 16.0)),
+                          ],
+                        ),
+                        TextButton(onPressed: () {}, child: Text(
+                        '주문하기'
+                        ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
