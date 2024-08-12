@@ -3,6 +3,8 @@ import 'package:bliu/widget/top_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../_component/search_screen.dart';
+
 //기획전
 class ExhibitionScreen extends StatefulWidget {
   const ExhibitionScreen({super.key});
@@ -33,7 +35,12 @@ class ExhibitionScreenState extends State<ExhibitionScreen> with TopWidgetDelega
           IconButton(
             icon: SvgPicture.asset("assets/images/exhibition/ic_top_sch.svg"),
             onPressed: () {
-              // 검색 버튼 동작
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchScreen(),
+                ),
+              );
             },
           ),
           Stack(

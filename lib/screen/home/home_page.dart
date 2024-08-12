@@ -1,3 +1,4 @@
+import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/_component/search_screen.dart';
 import 'package:bliu/screen/home/component/home_body_ai.dart';
 import 'package:bliu/screen/home/component/home_body_best_sales.dart';
@@ -90,7 +91,14 @@ class _HomePageState extends State<HomePage> {
                         "assets/images/home/ic_cart_w.svg",
                         color: _isScrolled ? Colors.black : Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CartScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
