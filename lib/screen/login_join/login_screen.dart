@@ -5,6 +5,8 @@ import 'package:bliu/screen/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'component/find_id_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -103,6 +105,12 @@ class LoginScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     // 아이디찾기 버튼 동작
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FindIdScreen(),
+                      ),
+                    );
                   },
                   child: Text('아이디찾기'),
                 ),
