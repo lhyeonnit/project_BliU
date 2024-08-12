@@ -1,3 +1,5 @@
+import 'package:bliu/screen/login_join/component/join_add_info_screen.dart';
+import 'package:bliu/screen/login_join/component/join_agree_screen.dart';
 import 'package:bliu/screen/login_join/login_screen.dart';
 import 'package:bliu/screen/main_page.dart';
 import 'package:bliu/screen/on_boarding_screen.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(), // OnBoardingScreen을 초기 화면으로 설정
+      home: JoinAddInfoScreen(), // OnBoardingScreen을 초기 화면으로 설정
     );
   }
 }
