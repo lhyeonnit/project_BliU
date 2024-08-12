@@ -1,5 +1,7 @@
 //로그인
 
+import 'package:bliu/screen/login_join/component/join_agree_screen.dart';
+import 'package:bliu/screen/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,16 +16,22 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: SvgPicture.asset("assets/images/login/ic_back.svg"),
           onPressed: () {
-            // 뒤로가기 버튼 눌렀을 때 동작
+            Navigator.pop(context); // 뒤로가기 동작
           },
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.home, color: Colors.black),
+            icon: SvgPicture.asset("assets/images/login/ic_home.svg"),
             onPressed: () {
               // 홈 버튼 눌렀을 때 동작
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MainPage(),
+                ),
+              );
             },
           ),
         ],
@@ -82,6 +90,12 @@ class LoginScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     // 회원가입 버튼 동작
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => JoinAgreeScreen(),
+                      ),
+                    );
                   },
                   child: Text('회원가입'),
                 ),
