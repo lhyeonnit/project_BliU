@@ -83,6 +83,7 @@ flutter:
     - assets/images/home/
     - assets/images/category/
     - assets/images/exhibition/
+    - assets/images/login/
   #   - images/a_dot_ham.jpeg
 
 flutter_native_splash:
