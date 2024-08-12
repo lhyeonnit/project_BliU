@@ -1,6 +1,9 @@
 import 'package:bliu/widget/product_item_widget.dart';
 import 'package:bliu/widget/top_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../_component/search_screen.dart';
 
 //기획전
 class ExhibitionScreen extends StatefulWidget {
@@ -19,15 +22,65 @@ class ExhibitionScreenState extends State<ExhibitionScreen> with TopWidgetDelega
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: SvgPicture.asset("assets/images/exhibition/ic_back.svg"),
+          onPressed: () {
+            Navigator.pop(context);  // 뒤로가기 동작
+          },
+        ),
+        title: Text("우리 아이를 위한 포근한 선택"),
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: SvgPicture.asset("assets/images/exhibition/ic_top_sch.svg"),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchScreen(),
+                ),
+              );
+            },
+          ),
+          Stack(
+            children: [
+              IconButton(
+                icon: SvgPicture.asset("assets/images/exhibition/ic_cart.svg"),
+                onPressed: () {
+                  // 장바구니 버튼 동작
+                },
+              ),
+              Positioned(
+                right: 8,
+                top: 28,
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.pink,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 12,
+                    minHeight: 12,
+                  ),
+                  child: Text(
+                    '2',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            TopWidget(
-              title: "test111111112312312312312312",
-              rightImage1: Image.asset('assets/app_resource/icon.png').image,
-              rightImage2: Image.asset('assets/app_resource/icon.png').image,
-              delegate: this,
-            ),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
@@ -36,7 +89,7 @@ class ExhibitionScreenState extends State<ExhibitionScreen> with TopWidgetDelega
                   children: [
                     Container(
                       height: 620,
-                      color: Colors.green,
+                      child: Image.asset("assets/images/exhibition/exhibition_img.png"),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
