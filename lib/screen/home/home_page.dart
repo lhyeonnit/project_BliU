@@ -54,11 +54,10 @@ class _HomePageState extends State<HomePage> {
                   pinned: true,
                   backgroundColor: _isScrolled ? Colors.white : Colors.transparent,
                   expandedHeight: 625.0,
-                  title: Text(
-                    'BliU',
-                    style: TextStyle(
-                      color: _isScrolled ? Colors.black : Colors.white,
-                    ),
+                  title: SvgPicture.asset(
+                    'assets/images/home/bottom_home.svg', // SVG 파일 경로
+                    color: _isScrolled ? Colors.black : Colors.white, // 색상 조건부 변경
+                    height: 40, // SVG 이미지의 높이 설정
                   ),
                   flexibleSpace: FlexibleSpaceBar(
                     background: HomeHeader(),
