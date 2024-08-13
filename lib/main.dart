@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(), // OnBoardingScreen을 초기 화면으로 설정
+      home: MainPage(), // OnBoardingScreen을 초기 화면으로 설정
     );
   }
 }

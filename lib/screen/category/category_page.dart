@@ -1,3 +1,4 @@
+import 'package:bliu/screen/product/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dummy/category.dart';
@@ -70,6 +71,12 @@ class _CategoryPageState extends State<CategoryPage> {
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // 하위 카테고리 선택 시 처리
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) => ProductListScreen(),
+                        ),
+                        );
                       },
                     ))
                         .toList(),

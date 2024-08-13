@@ -1,0 +1,10 @@
+<svg id="ic_smart" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <rect id="사각형_16788" data-name="사각형 16788" width="30" height="30" fill="none"/>
+  <path id="패스_39030" data-name="패스 39030" d="M176,40h4.916v4.916" transform="translate(-155.101 -35.815)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+  <path id="패스_39031" data-name="패스 39031" d="M44.916,180.916H40V176" transform="translate(-35.816 -155.101)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+  <path id="패스_39032" data-name="패스 39032" d="M180.916,176v4.916H176" transform="translate(-155.101 -155.101)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+  <path id="패스_39033" data-name="패스 39033" d="M40,44.916V40h4.916" transform="translate(-35.816 -35.815)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+  <g id="그룹_37190" data-name="그룹 37190" transform="translate(8.494 8.494)">
+    <path id="패스_39034" data-name="패스 39034" d="M28.471,64.583l-4.085-1.505a.587.587,0,0,1,0-1.1l4.085-1.505,1.505-4.085a.587.587,0,0,1,1.1,0l1.505,4.085,4.085,1.505a.587.587,0,0,1,0,1.1l-4.085,1.505-1.505,4.085a.587.587,0,0,1-1.1,0Z" transform="translate(-24.003 -56.003)" fill="#ff6192"/>
+  </g>
+</svg>
