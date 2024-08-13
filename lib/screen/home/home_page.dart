@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 
 import '../_controller/home/home_controller.dart';
 
-
 class HomePage extends StatelessWidget {
   final HomeController controller = Get.put(HomeController());
   final ScrollController _scrollController = ScrollController();
@@ -33,34 +32,31 @@ class HomePage extends StatelessWidget {
             child: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                Obx(() => SliverAppBar(
+                SliverToBoxAdapter(
+                  child: HomeHeader(), // HomeHeader가 다른 콘텐츠와 함께 스크롤되도록 설정
+                ),
+                SliverAppBar(
                   pinned: true,
-                  backgroundColor: controller.isScrolled.value
-                      ? Colors.white
-                      : Colors.transparent,
+                  backgroundColor: Colors.white,
                   leading: IconButton(
                     icon: SvgPicture.asset(
                       "assets/images/login/ic_back.svg",
-                      color: controller.isScrolled.value ? Colors.black : Colors.white,
+                      color: Colors.black,
                     ),
                     onPressed: () {
                       Get.back(); // 뒤로가기 동작을 GetX로 간단하게 처리
                     },
                   ),
-                  expandedHeight: 625.0,
                   title: SvgPicture.asset(
                     'assets/images/home/bottom_home.svg', // SVG 파일 경로
-                    color: controller.isScrolled.value ? Colors.black : Colors.white,
+                    color: Colors.black,
                     height: 40, // SVG 이미지의 높이 설정
-                  ),
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: HomeHeader(),
                   ),
                   actions: [
                     IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/home/ic_top_sch_w.svg",
-                        color: controller.isScrolled.value ? Colors.black : Colors.white,
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         Get.to(() => SearchScreen());
@@ -69,21 +65,21 @@ class HomePage extends StatelessWidget {
                     IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/home/ic_smart_w.svg",
-                        color: controller.isScrolled.value ? Colors.black : Colors.white,
+                        color: Colors.black,
                       ),
                       onPressed: () {},
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/home/ic_cart_w.svg",
-                        color: controller.isScrolled.value ? Colors.black : Colors.white,
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         Get.to(() => CartScreen());
                       },
                     ),
                   ],
-                )),
+                ),
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
