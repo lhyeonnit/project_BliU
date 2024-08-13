@@ -44,13 +44,6 @@ class OnBoardingController extends GetxController {
   }
 
   void onSkipOrNext() {
-    if (currentPage.value == 2) {
-      Get.off(() =>  MainPage()); // MainPage로 이동하고 온보딩 화면 제거
-    } else {
-      pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
-    }
+    Get.off(() => MainPage()); // 항상 MainPage로 이동
   }
 }

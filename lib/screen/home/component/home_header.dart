@@ -1,54 +1,20 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class HomeHeader extends StatefulWidget {
+import '../../_controller/home/home_header_controller.dart';
+
+class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
   @override
-  _HomeHeaderState createState() => _HomeHeaderState();
-}
-
-class _HomeHeaderState extends State<HomeHeader> {
-  final PageController _pageController = PageController();
-  Timer? _timer;
-  int _currentPage = 0;
-  final int _totalPages = 2;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
-        if (_currentPage < _totalPages - 1) {
-          _currentPage++;
-        } else {
-          _currentPage = 0;
-        }
-
-        _pageController.animateToPage(
-          _currentPage,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeIn,
-        );
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final HomeHeaderController controller = Get.put(HomeHeaderController());
+
     return Stack(
       children: [
         PageView(
-          controller: _pageController,
+          controller: controller.pageController,
           children: [
             buildPage(
               imagePath: 'assets/images/home/main_bn01.png',
@@ -69,16 +35,16 @@ class _HomeHeaderState extends State<HomeHeader> {
           left: 0,
           right: 327,
           child: Center(
-            child: SmoothPageIndicator(
-              controller: _pageController,
-              count: _totalPages,
+            child: Obx(() => SmoothPageIndicator(
+              controller: controller.pageController,
+              count: controller.totalPages,
               effect: WormEffect(
                 dotWidth: 6.0,
                 dotHeight: 6.0,
                 activeDotColor: Colors.white,
                 dotColor: Colors.grey,
               ),
-            ),
+            )),
           ),
         ),
       ],
