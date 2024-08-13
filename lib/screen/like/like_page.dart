@@ -1,18 +1,11 @@
 // like_page.dart
-
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import '../_controller/like/like_controller.dart';
 import 'dummy/like.dart';
 
-class LikePage extends StatefulWidget {
-  const LikePage({super.key});
-
-  @override
-  _LikePageState createState() => _LikePageState();
-}
-
-class _LikePageState extends State<LikePage> {
-  String selectedCategory = '전체';
+class LikePage extends StatelessWidget {
+  final LikeController controller = Get.put(LikeController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +28,24 @@ class _LikePageState extends State<LikePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        selectedCategory = categories[index];
-                      });
+                      controller.updateCategory(categories[index]);
                     },
-                    child: Column(
+                    child: Obx(() => Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           categories[index],
                           style: TextStyle(
                             fontSize: 16.0,
-                            color: selectedCategory == categories[index]
+                            color: controller.selectedCategory.value == categories[index]
                                 ? Colors.black
                                 : Colors.grey,
-                            fontWeight: selectedCategory == categories[index]
+                            fontWeight: controller.selectedCategory.value == categories[index]
                                 ? FontWeight.bold
                                 : FontWeight.normal,
                           ),
                         ),
-                        if (selectedCategory == categories[index])
+                        if (controller.selectedCategory.value == categories[index])
                           Container(
                             margin: EdgeInsets.only(top: 4.0),
                             height: 2.0,
@@ -62,7 +53,7 @@ class _LikePageState extends State<LikePage> {
                             color: Colors.black,
                           ),
                       ],
-                    ),
+                    )),
                   ),
                 );
               },
@@ -90,7 +81,7 @@ class _LikePageState extends State<LikePage> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
+            child: Obx(() => GridView.builder(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -102,7 +93,7 @@ class _LikePageState extends State<LikePage> {
               itemBuilder: (context, index) {
                 return buildItemCard(items[index]);
               },
-            ),
+            )),
           ),
         ],
       ),
@@ -133,15 +124,15 @@ class _LikePageState extends State<LikePage> {
               },
             ),
           ),
-        Text(
-              item['brand']!,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12.0,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis, // 길이가 길면 생략
+          Text(
+            item['brand']!,
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12.0,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis, // 길이가 길면 생략
+          ),
           Text(
             item['name']!,
             style: TextStyle(
@@ -177,7 +168,7 @@ class _LikePageState extends State<LikePage> {
             ],
           ),
         ],
-      )
+      ),
     );
   }
 }
