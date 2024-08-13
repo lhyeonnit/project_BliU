@@ -1,8 +1,8 @@
-//상품 리스트
-import 'package:bliu/screen/_component/cart_screen.dart';
-import 'package:bliu/screen/_component/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bliu/screen/_component/cart_screen.dart';
+import 'package:bliu/screen/_component/search_screen.dart';
+import 'component/product_category_bottom.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -12,21 +12,37 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String _sortOption = '최신순';
-  String _ageFilter = '연령';
-  String _styleFilter = '스타일';
-  String _priceFilter = '가격';
+  String _selectedCategory = '아우터';
+
+  String selectedAgeOption = '';
+  String selectedStyleOption = '';
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this); // 여기서 초기화합니다.
+    _tabController = TabController(length: 5, vsync: this);
   }
 
   @override
   void dispose() {
-    _tabController.dispose(); // TabController를 해제합니다.
+    _tabController.dispose();
     super.dispose();
+  }
+
+  void _openCategoryBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ProductCategoryBottom(
+          onCategorySelected: (category) {
+            setState(() {
+              _selectedCategory = category;
+            });
+            Navigator.pop(context); // Close the bottom sheet
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -39,18 +55,21 @@ class _ProductListScreenState extends State<ProductListScreen>
         leading: IconButton(
           icon: SvgPicture.asset("assets/images/product/ic_back.svg"),
           onPressed: () {
-            Navigator.pop(context); // 뒤로가기 동작
+            Navigator.pop(context);
           },
         ),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              '아우터',
-              style: TextStyle(color: Colors.black),
-            ),
-            Icon(Icons.expand_more, color: Colors.black), // 드롭다운 아이콘
-          ],
+        title: InkWell(
+          onTap: _openCategoryBottomSheet, // Open the bottom sheet on tap
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                _selectedCategory,
+                style: TextStyle(color: Colors.black),
+              ),
+              Icon(Icons.expand_more, color: Colors.black),
+            ],
+          ),
         ),
         centerTitle: true,
         actions: [
@@ -58,12 +77,9 @@ class _ProductListScreenState extends State<ProductListScreen>
             icon: SvgPicture.asset("assets/images/product/ic_top_sch.svg"),
             color: Colors.black,
             onPressed: () {
-              // 검색 화면으로 이동
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                  builder: (context) => SearchScreen(),
-              ),
+                context,
+                MaterialPageRoute(builder: (context) => SearchScreen()),
               );
             },
           ),
@@ -72,12 +88,9 @@ class _ProductListScreenState extends State<ProductListScreen>
               IconButton(
                 icon: SvgPicture.asset("assets/images/product/ic_cart.svg"),
                 onPressed: () {
-                  // 장바구니 화면으로 이동
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                      builder: (context) => CartScreen(),
-                  ),
+                    context,
+                    MaterialPageRoute(builder: (context) => CartScreen()),
                   );
                 },
               ),
@@ -118,96 +131,55 @@ class _ProductListScreenState extends State<ProductListScreen>
       ),
       body: Column(
         children: [
+          // Adding the filter and product count UI
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                DropdownButton<String>(
-                  value: _sortOption,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _sortOption = newValue!;
-                    });
-                  },
-                  items: <String>['최신순', '인기순', '할인순']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                Row(
+                  children: [
+                    Icon(Icons.swap_vert, size: 20),
+                    SizedBox(width: 4),
+                    Text(
+                      '최신순',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
-                DropdownButton<String>(
-                  value: _ageFilter,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _ageFilter = newValue!;
-                    });
-                  },
-                  items: <String>['연령', '아동', '성인']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 버튼 간격 조정
+                  children: [
+                    _buildFilterButton(context, '연령'),
+                    _buildFilterButton(context, '스타일'),
+                    _buildFilterButton(context, '가격'),
+                  ],
                 ),
-                DropdownButton<String>(
-                  value: _styleFilter,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _styleFilter = newValue!;
-                    });
-                  },
-                  items: <String>['스타일', '캐주얼', '포멀']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '상품 128,123',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ),
                 ),
-                DropdownButton<String>(
-                  value: _priceFilter,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _priceFilter = newValue!;
-                    });
-                  },
-                  items: <String>['가격', '낮은 가격', '높은 가격']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                // The rest of your TabBarView or other content goes here
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      Center(child: Text('전체 상품 수: 128,123')),
+                      Center(child: Text('자켓')),
+                      Center(child: Text('가디건/베스트')),
+                      Center(child: Text('코트')),
+                      Center(child: Text('후드집업')),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('상품 128,123'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              padding: EdgeInsets.all(16.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 16.0,
-                mainAxisSpacing: 16.0,
-              ),
-              itemCount: 10, // 예시 아이템 수
-              itemBuilder: (context, index) {
-                return _buildProductItem();
-              },
             ),
           ),
         ],
@@ -215,47 +187,33 @@ class _ProductListScreenState extends State<ProductListScreen>
     );
   }
 
-  Widget _buildProductItem() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              image: DecorationImage(
-                image: AssetImage('assets/images/exhibition/exhibition_img.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
+  Widget _buildFilterButton(BuildContext context, String label) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0), // 둥근 모서리
+        ),
+        side: BorderSide(
+          color: Colors.grey, // 테두리 색상
+        ),
+        padding:
+            EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // 패딩 조정
+      ),
+      onPressed: () {
+        // 버튼 클릭 시 실행될 코드
+      },
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: TextStyle(color: Colors.black), // 텍스트 색상
           ),
-        ),
-        SizedBox(height: 8.0),
-        Text(
-          '꿈꾸는데이지 안나 토션 레이스 베스트',
-          style: TextStyle(fontSize: 14.0, color: Colors.black),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          '15% 32,800원',
-          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 4.0),
-        Row(
-          children: [
-            Icon(Icons.favorite_border, size: 16.0, color: Colors.grey),
-            SizedBox(width: 4.0),
-            Text('13,000', style: TextStyle(fontSize: 12.0, color: Colors.grey)),
-            SizedBox(width: 16.0),
-            Icon(Icons.chat_bubble_outline, size: 16.0, color: Colors.grey),
-            SizedBox(width: 4.0),
-            Text('49', style: TextStyle(fontSize: 12.0, color: Colors.grey)),
-          ],
-        ),
-      ],
+          Icon(
+            Icons.arrow_drop_down, // 드롭다운 아이콘
+            color: Colors.black,
+          ),
+        ],
+      ),
     );
   }
 }
