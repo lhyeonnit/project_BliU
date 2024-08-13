@@ -8,38 +8,19 @@ import 'package:bliu/screen/home/component/home_footer.dart';
 import 'package:bliu/screen/home/component/home_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import '../_controller/home/home_controller.dart';
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
 
-class _HomePageState extends State<HomePage> {
-  ScrollController _scrollController = ScrollController();
-  bool _isScrolled = false;
+class HomePage extends StatelessWidget {
+  final HomeController controller = Get.put(HomeController());
+  final ScrollController _scrollController = ScrollController();
 
-  @override
-  void initState() {
-    super.initState();
+  HomePage({Key? key}) : super(key: key) {
     _scrollController.addListener(() {
-      if (_scrollController.offset > 50 && !_isScrolled) {
-        setState(() {
-          _isScrolled = true;
-        });
-      } else if (_scrollController.offset <= 50 && _isScrolled) {
-        setState(() {
-          _isScrolled = false;
-        });
-      }
+      controller.updateScrollPosition(_scrollController);
     });
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -52,24 +33,24 @@ class _HomePageState extends State<HomePage> {
             child: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                SliverAppBar(
+                Obx(() => SliverAppBar(
                   pinned: true,
-                  backgroundColor:
-                      _isScrolled ? Colors.white : Colors.transparent,
+                  backgroundColor: controller.isScrolled.value
+                      ? Colors.white
+                      : Colors.transparent,
                   leading: IconButton(
                     icon: SvgPicture.asset(
                       "assets/images/login/ic_back.svg",
-                      color: _isScrolled ? Colors.black : Colors.white,
+                      color: controller.isScrolled.value ? Colors.black : Colors.white,
                     ),
                     onPressed: () {
-                      Navigator.pop(context); // 뒤로가기 동작
+                      Get.back(); // 뒤로가기 동작을 GetX로 간단하게 처리
                     },
                   ),
                   expandedHeight: 625.0,
                   title: SvgPicture.asset(
                     'assets/images/home/bottom_home.svg', // SVG 파일 경로
-                    color: _isScrolled ? Colors.black : Colors.white,
-                    // 색상 조건부 변경
+                    color: controller.isScrolled.value ? Colors.black : Colors.white,
                     height: 40, // SVG 이미지의 높이 설정
                   ),
                   flexibleSpace: FlexibleSpaceBar(
@@ -79,40 +60,30 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/home/ic_top_sch_w.svg",
-                        color: _isScrolled ? Colors.black : Colors.white,
+                        color: controller.isScrolled.value ? Colors.black : Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchScreen(),
-                          ),
-                        );
+                        Get.to(() => SearchScreen());
                       },
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/home/ic_smart_w.svg",
-                        color: _isScrolled ? Colors.black : Colors.white,
+                        color: controller.isScrolled.value ? Colors.black : Colors.white,
                       ),
                       onPressed: () {},
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/home/ic_cart_w.svg",
-                        color: _isScrolled ? Colors.black : Colors.white,
+                        color: controller.isScrolled.value ? Colors.black : Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CartScreen(),
-                          ),
-                        );
+                        Get.to(() => CartScreen());
                       },
                     ),
                   ],
-                ),
+                )),
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
