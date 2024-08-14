@@ -7,6 +7,8 @@ class ProductFilterBottom extends StatelessWidget {
   final List<String> selectedStyleOption;
   final ValueChanged<String> onAgeOptionSelected;
   final ValueChanged<String> onStyleOptionSelected;
+  final VoidCallback onResetFilters;
+  final VoidCallback onApplyFilters;
 
   const ProductFilterBottom({
     Key? key,
@@ -16,6 +18,8 @@ class ProductFilterBottom extends StatelessWidget {
     required this.selectedStyleOption,
     required this.onAgeOptionSelected,
     required this.onStyleOptionSelected,
+    required this.onResetFilters,
+    required this.onApplyFilters,
   }) : super(key: key);
 
   @override
@@ -32,7 +36,7 @@ class ProductFilterBottom extends StatelessWidget {
                 height: 5,
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
@@ -77,11 +81,36 @@ class ProductFilterBottom extends StatelessWidget {
               }).toList(),
             ),
             SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('상품보기'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // 새로고침 버튼
+                IconButton(
+                  onPressed: () {
+                    onResetFilters();
+                  },
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Colors.black,
+                  ),
+                ),
+                // 상품보기 버튼
+                ElevatedButton(
+                  onPressed: () {
+                    onApplyFilters();  // 필터를 적용하는 함수 호출
+                    Navigator.pop(context); // 모달 닫기
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey, // 버튼 배경색을 회색으로 설정
+                  ),
+                  child: Text(
+                    '상품보기',
+                    style: TextStyle(
+                      color: Colors.white, // 텍스트 색상을 흰색으로 설정
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -97,6 +126,8 @@ class ProductFilterBottom extends StatelessWidget {
         required List<String> selectedStyleOption,
         required ValueChanged<String> onAgeOptionSelected,
         required ValueChanged<String> onStyleOptionSelected,
+        required VoidCallback onResetFilters,
+        required VoidCallback onApplyFilters,
       }) {
     showModalBottomSheet(
       context: context,
@@ -111,6 +142,8 @@ class ProductFilterBottom extends StatelessWidget {
             selectedStyleOption: selectedStyleOption,
             onAgeOptionSelected: onAgeOptionSelected,
             onStyleOptionSelected: onStyleOptionSelected,
+            onResetFilters: onResetFilters,
+            onApplyFilters: onApplyFilters,
           ),
         );
       },

@@ -262,6 +262,18 @@ class _ProductListScreenState extends State<ProductListScreen>
               }
             });
           },
+          onResetFilters: () {
+            setState(() {
+              selectedAgeOption.clear(); // 선택된 연령 필터 초기화
+              selectedStyleOption.clear(); // 선택된 스타일 필터 초기화
+            });
+          },
+          onApplyFilters: () {
+            setState(() {
+              // 선택된 필터 옵션을 적용하고, 필요에 따라 데이터를 다시 로드하거나 UI를 업데이트합니다.
+            });
+            Navigator.pop(context); // 필터 적용 후 모달을 닫습니다.
+          },
         );
       },
       child: Row(
@@ -278,6 +290,7 @@ class _ProductListScreenState extends State<ProductListScreen>
       ),
     );
   }
+
 
   Widget _buildProductGrid(int productCount) {
     return Column(
