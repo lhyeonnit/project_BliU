@@ -13,21 +13,6 @@ class ProductBody extends StatelessWidget {
     return DefaultTabController(
       length: 2, // 두 개의 탭
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            'Product Detail',
-            style: TextStyle(color: Colors.black),
-          ),
-          bottom: const TabBar(
-            labelColor: Colors.black,
-            indicatorColor: Colors.black,
-            tabs: [
-              Tab(text: '상품 정보'),
-              Tab(text: '리뷰'),
-            ],
-          ),
-        ),
         body: TabBarView(
           children: [
             ProductInfoContent(), // 상품 정보 탭의 내용
