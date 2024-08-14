@@ -324,7 +324,6 @@ class _RecommandInfoScreenState extends State<RecommandInfoScreen> {
                   title: Text('추천정보'),
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
-                  elevation: 0.5,
                 ),
               ),
             ),

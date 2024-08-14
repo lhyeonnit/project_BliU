@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../product_detail_screen.dart';
+import '../../product_detail_screen.dart';
 
 class ProductListCard extends StatefulWidget {
   @override

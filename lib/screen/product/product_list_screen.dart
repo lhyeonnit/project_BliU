@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/_component/search_screen.dart';
-import 'component/product_list_card.dart';
-import 'component/product_category_bottom.dart';
-import 'component/product_filter_bottom.dart';
-import 'component/product_sort_bottom.dart';
+import 'component/list/product_filter_bottom.dart';
+import 'component/list/product_list_card.dart';
+import 'component/list/product_category_bottom.dart';
+import 'component/list/product_sort_bottom.dart';
+
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -74,7 +75,6 @@ class _ProductListScreenState extends State<ProductListScreen>
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0.5,
         leading: IconButton(
           icon: SvgPicture.asset("assets/images/product/ic_back.svg"),
           onPressed: () {
