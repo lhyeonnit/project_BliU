@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/_component/search_screen.dart';
-import 'component/product_card.dart';
+import 'component/product_list_card.dart';
 import 'component/product_category_bottom.dart';
 import 'component/product_filter_bottom.dart';
 import 'component/product_sort_bottom.dart';
@@ -315,7 +315,7 @@ class _ProductListScreenState extends State<ProductListScreen>
             ),
             itemCount: productCount, // 실제 상품 수로 변경
             itemBuilder: (context, index) {
-              return ProductCard();
+              return ProductListCard();
             },
           ),
         ),

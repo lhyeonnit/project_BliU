@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-
-
 import '../product_detail_screen.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductListCard extends StatefulWidget {
+  @override
+  _ProductListCardState createState() => _ProductListCardState();
+}
+
+class _ProductListCardState extends State<ProductListCard> {
+  bool isFavorite = false; // 좋아요 상태를 관리하기 위한 변수
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,14 +28,34 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)), // 사진의 모서리만 둥글게 설정
-              child: Image.asset(
-                'assets/images/home/exhi.png', // 실제 이미지 경로로 변경
-                height: 180,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)), // 사진의 모서리만 둥글게 설정
+                  child: Image.asset(
+                    'assets/images/home/exhi.png', // 실제 이미지 경로로 변경
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  top: 5,
+                  right: 5,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isFavorite = !isFavorite; // 좋아요 상태를 토글
+                      });
+                    },
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.pink : Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
