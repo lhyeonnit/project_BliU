@@ -1,8 +1,12 @@
+import 'package:bliu/screen/product/dummy/filter_option.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/_component/search_screen.dart';
+import 'component/product_card.dart';
 import 'component/product_category_bottom.dart';
+import 'component/product_filter_bottom.dart';
+import 'component/product_sort_bottom.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -13,9 +17,11 @@ class _ProductListScreenState extends State<ProductListScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _selectedCategory = '아우터';
+  String sortOption = '최신순';
+  String sortOptionSelected = '';
 
-  String selectedAgeOption = '';
-  String selectedStyleOption = '';
+  List<String> selectedAgeOption = [];
+  List<String> selectedStyleOption = [];
 
   @override
   void initState() {
@@ -27,6 +33,23 @@ class _ProductListScreenState extends State<ProductListScreen>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  void _openSortBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ProductSortBottom(
+          sortOption: sortOption,
+          onSortOptionSelected: (selectedOption) {
+            setState(() {
+              sortOptionSelected = selectedOption;
+              sortOption = selectedOption; // 선택된 정렬 옵션으로 업데이트
+            });
+          },
+        );
+      },
+    );
   }
 
   void _openCategoryBottomSheet() {
@@ -115,75 +138,91 @@ class _ProductListScreenState extends State<ProductListScreen>
             ],
           ),
         ],
-        bottom: TabBar(
-          controller: _tabController,
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey,
-          indicatorColor: Colors.black,
-          tabs: [
-            Tab(text: '전체'),
-            Tab(text: '자켓'),
-            Tab(text: '가디건/베스트'),
-            Tab(text: '코트'),
-            Tab(text: '후드집업'),
-          ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50.0), // TabBar 높이 조정
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1), // 그림자 색상 조정
+                      spreadRadius: 1, // 그림자가 확산되는 반경
+                      blurRadius: 5, // 그림자 블러 처리
+                      offset: Offset(0, 3), // 그림자가 생기는 위치
+                    ),
+                  ],
+                ),
+                child: Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: Colors.grey[300], // 구분선 색상 조정
+                ),
+              ),
+              TabBar(
+                controller: _tabController,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                indicatorColor: Colors.black,
+                tabs: [
+                  Tab(text: '전체'),
+                  Tab(text: '자켓'),
+                  Tab(text: '가디건/베스트'),
+                  Tab(text: '코트'),
+                  Tab(text: '후드집업'),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-      body: Column(
-        children: [
-          // Adding the filter and product count UI
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+      body: Column(children: [
+        // Filter buttons and product count
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: _openSortBottomSheet, // 정렬 옵션 선택 창 열기
+                child: Row(
                   children: [
                     Icon(Icons.swap_vert, size: 20),
                     SizedBox(width: 4),
                     Text(
-                      '최신순',
+                      sortOptionSelected.isNotEmpty
+                          ? sortOptionSelected
+                          : '최신순', // 선택된 정렬 옵션 표시
                       style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 버튼 간격 조정
-                  children: [
-                    _buildFilterButton(context, '연령'),
-                    _buildFilterButton(context, '스타일'),
-                    _buildFilterButton(context, '가격'),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '상품 128,123',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ),
-                ),
-                // The rest of your TabBarView or other content goes here
-                Expanded(
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      Center(child: Text('전체 상품 수: 128,123')),
-                      Center(child: Text('자켓')),
-                      Center(child: Text('가디건/베스트')),
-                      Center(child: Text('코트')),
-                      Center(child: Text('후드집업')),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+              Row(
+                children: [
+                  _buildFilterButton(context, '연령'),
+                  SizedBox(width: 8), // 간격 추가
+                  _buildFilterButton(context, '스타일'),
+                  SizedBox(width: 8), // 간격 추가
+                  _buildFilterButton(context, '가격'),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildProductGrid(10), // 전체 상품 수로 설정
+              _buildProductGrid(10), // 자켓 상품 수로 설정
+              _buildProductGrid(10), // 가디건/베스트 상품 수로 설정
+              _buildProductGrid(10), // 코트 상품 수로 설정
+              _buildProductGrid(10), // 후드집업 상품 수로 설정
+            ],
+          ),
+        ),
+      ]),
     );
   }
 
@@ -191,29 +230,83 @@ class _ProductListScreenState extends State<ProductListScreen>
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // 둥근 모서리
+          borderRadius: BorderRadius.circular(20.0),
         ),
         side: BorderSide(
-          color: Colors.grey, // 테두리 색상
+          color: Colors.grey,
         ),
-        padding:
-            EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // 패딩 조정
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
       ),
       onPressed: () {
-        // 버튼 클릭 시 실행될 코드
+        ProductFilterBottom.show(
+          context,
+          ageOptions: ageOptions.map((option) => option.label).toList(),
+          styleOptions: styleOptions.map((option) => option.label).toList(),
+          selectedAgeOption: selectedAgeOption,
+          selectedStyleOption: selectedStyleOption,
+          onAgeOptionSelected: (String selectedAge) {
+            setState(() {
+              if (selectedAgeOption.contains(selectedAge)) {
+                selectedAgeOption.remove(selectedAge); // 이미 선택된 경우 제거
+              } else {
+                selectedAgeOption.add(selectedAge); // 새로 선택된 경우 추가
+              }
+            });
+          },
+          onStyleOptionSelected: (String selectedStyle) {
+            setState(() {
+              if (selectedStyleOption.contains(selectedStyle)) {
+                selectedStyleOption.remove(selectedStyle); // 이미 선택된 경우 제거
+              } else {
+                selectedStyleOption.add(selectedStyle); // 새로 선택된 경우 추가
+              }
+            });
+          },
+        );
       },
       child: Row(
         children: [
           Text(
             label,
-            style: TextStyle(color: Colors.black), // 텍스트 색상
+            style: TextStyle(color: Colors.black),
           ),
           Icon(
-            Icons.arrow_drop_down, // 드롭다운 아이콘
+            Icons.arrow_drop_down,
             color: Colors.black,
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildProductGrid(int productCount) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          // Padding for consistency
+          child: Text(
+            '상품 $productCount', // 상품 수 표시
+            style: TextStyle(fontSize: 14, color: Colors.black),
+          ),
+        ),
+        Expanded(
+          child: GridView.builder(
+            padding: const EdgeInsets.all(8.0),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // 두 개의 열
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 0.6, // 아이템의 가로세로 비율
+            ),
+            itemCount: productCount, // 실제 상품 수로 변경
+            itemBuilder: (context, index) {
+              return ProductCard();
+            },
+          ),
+        ),
+      ],
     );
   }
 }

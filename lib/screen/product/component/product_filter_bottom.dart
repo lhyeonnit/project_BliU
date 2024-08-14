@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ProductFilterBottom extends StatelessWidget {
   final List<String> ageOptions;
   final List<String> styleOptions;
-  final String selectedAgeOption;
-  final String selectedStyleOption;
+  final List<String> selectedAgeOption;
+  final List<String> selectedStyleOption;
   final ValueChanged<String> onAgeOptionSelected;
   final ValueChanged<String> onStyleOptionSelected;
 
@@ -48,7 +48,7 @@ class ProductFilterBottom extends StatelessWidget {
               children: ageOptions.map((String option) {
                 return ChoiceChip(
                   label: Text(option),
-                  selected: selectedAgeOption == option,
+                  selected: selectedAgeOption.contains(option),
                   selectedColor: Colors.pinkAccent,
                   onSelected: (bool selected) {
                     onAgeOptionSelected(option);
@@ -68,7 +68,7 @@ class ProductFilterBottom extends StatelessWidget {
               children: styleOptions.map((String option) {
                 return ChoiceChip(
                   label: Text(option),
-                  selected: selectedStyleOption == option,
+                  selected: selectedStyleOption.contains(option),
                   selectedColor: Colors.pinkAccent,
                   onSelected: (bool selected) {
                     onStyleOptionSelected(option);
@@ -77,18 +77,6 @@ class ProductFilterBottom extends StatelessWidget {
               }).toList(),
             ),
             SizedBox(height: 32),
-            Text(
-              '가격',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            RangeSlider(
-              values: RangeValues(0, 100000),
-              min: 0,
-              max: 100000,
-              onChanged: (RangeValues values) {},
-            ),
-            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -101,20 +89,21 @@ class ProductFilterBottom extends StatelessWidget {
     );
   }
 
-  static void show(BuildContext context, {
-    required List<String> ageOptions,
-    required List<String> styleOptions,
-    required String selectedAgeOption,
-    required String selectedStyleOption,
-    required ValueChanged<String> onAgeOptionSelected,
-    required ValueChanged<String> onStyleOptionSelected,
-  }) {
+  static void show(
+      BuildContext context, {
+        required List<String> ageOptions,
+        required List<String> styleOptions,
+        required List<String> selectedAgeOption,
+        required List<String> selectedStyleOption,
+        required ValueChanged<String> onAgeOptionSelected,
+        required ValueChanged<String> onStyleOptionSelected,
+      }) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.9,
+          heightFactor: 0.7,
           child: ProductFilterBottom(
             ageOptions: ageOptions,
             styleOptions: styleOptions,
