@@ -1,11 +1,9 @@
-import 'dart:io';
-import 'package:bliu/screen/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '_controller/on_boarding_controller.dart';
+import '../_controller/on_boarding_controller.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   final OnBoardingController controller = Get.put(OnBoardingController());
