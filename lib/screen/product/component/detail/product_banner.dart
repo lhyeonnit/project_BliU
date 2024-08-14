@@ -48,7 +48,6 @@ class _ProductBannerState extends State<ProductBanner> {
             },
             itemBuilder: (context, index) {
               return ClipRRect(
-                borderRadius: BorderRadius.circular(10.0), // 사진 모서리 둥글게 설정
                 child: Image.asset(
                   _images[index],
                   fit: BoxFit.cover, // 이미지가 컨테이너를 꽉 채우도록 설정
