@@ -1,13 +1,10 @@
-import 'package:bliu/screen/login_join/login_screen.dart';
-import 'package:bliu/screen/main_page.dart';
-import 'package:bliu/screen/common/on_boarding_screen.dart';
+
 import 'package:bliu/utils/permission_manager.dart';
 import 'package:bliu/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import 'screen/common/recommand_info_screen.dart';
+import 'screen/product/product_list_screen.dart';
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RecommandInfoScreen(), // OnBoardingScreen을 초기 화면으로 설정
+      home: ProductListScreen(), // OnBoardingScreen을 초기 화면으로 설정
     );
   }
 }
