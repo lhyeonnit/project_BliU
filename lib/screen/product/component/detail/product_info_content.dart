@@ -1,41 +1,101 @@
 import 'package:flutter/material.dart';
 
-class ProductInfoContent extends StatelessWidget {
+class ProductInfoContent extends StatefulWidget {
+  const ProductInfoContent({super.key});
+
+  @override
+  _ProductInfoContentState createState() => _ProductInfoContentState();
+}
+
+class _ProductInfoContentState extends State<ProductInfoContent> {
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 이미지 그리드
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.count(
-              crossAxisCount: 2, // 한 줄에 두 개의 이미지를 표시
-              crossAxisSpacing: 8.0, // 이미지 간격
-              mainAxisSpacing: 8.0,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(), // 이 그리드 자체 스크롤 방지
-              children: List.generate(4, (index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/home/exhi.png', // 이미지 경로를 여기에 추가
-                    fit: BoxFit.cover,
+    return Container(
+      height: 750,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 16, left: 16, top: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 내용 표시 부분
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              height: isExpanded ? null : 700, // 펼쳐지지 않았을 때 높이를 제한
+              child: SingleChildScrollView(
+                physics: isExpanded ? null : const NeverScrollableScrollPhysics(), // 펼쳐지기 전엔 스크롤 비활성화
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset('assets/images/product/item_dt.png'),
+                    const SizedBox(height: 16.0),
+                    const Text(
+                      "여기에 더 많은 상품 설명이 들어갑니다. 펼쳐진 상태에서 모든 내용을 볼 수 있습니다.",
+                    ),
+                    const SizedBox(height: 16.0),
+                    for (int i = 0; i < 20; i++) // 더 많은 텍스트를 추가하여 스크롤 가능하게 함
+                      const Text(
+                        "더 많은 설명 내용...",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            // 상품 정보 펼쳐보기 버튼
+            if (!isExpanded)
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isExpanded = true; // 펼쳐보기 버튼 클릭 시 스크롤 활성화
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black12),
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: Colors.white,
                   ),
-                );
-              }),
-            ),
-          ),
-          // 설명 텍스트
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              '밀크마일(MilkMile)은 유아와 어린이를 위한 의류 브랜드로, 높은 품질과 귀여운 디자인으로 많은 부모들의 사랑을 받고 있습니다. 밀크마일은 신생아부터 유아기까지의 아이들을 위한 다양한 의류 제품을 제공하며, 아이들의 편안함과 안전성을 최우선으로 고려한 제품을 제작합니다.',
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            ),
-          ),
-        ],
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "상품 정보 펼쳐보기",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            if (isExpanded)
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isExpanded = false; // 다시 접기
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black12),
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: Colors.white,
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "상품 정보 접기",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

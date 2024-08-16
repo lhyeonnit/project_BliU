@@ -151,6 +151,7 @@ class ProductInfoTitle extends StatelessWidget {
               ],
             ),
           ),
+
         ],
       ),
     );
