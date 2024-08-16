@@ -1,4 +1,5 @@
 
+import 'package:bliu/screen/common/on_boarding_screen.dart';
 import 'package:bliu/utils/permission_manager.dart';
 import 'package:bliu/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProductListScreen(), // OnBoardingScreen을 초기 화면으로 설정
+      home: OnBoardingScreen(), // OnBoardingScreen을 초기 화면으로 설정
     );
   }
 }
