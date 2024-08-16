@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../dummy/coupon_list.dart';
-import 'coupon_card.dart';
+import '../product/dummy/coupon_list.dart';
+import '../product/component/detail/coupon_card.dart';
 
 class CouponReceiveScreen extends StatefulWidget {
   const CouponReceiveScreen({Key? key}) : super(key: key);

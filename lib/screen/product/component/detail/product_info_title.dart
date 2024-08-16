@@ -1,4 +1,4 @@
-import 'package:bliu/screen/product/component/detail/coupon_receive_screen.dart';
+import 'package:bliu/screen/_component/coupon_receive_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductInfoTitle extends StatelessWidget {
