@@ -1,17 +1,15 @@
-//상품 상세
-import 'package:bliu/screen/product/component/detail/product_ai.dart';
-import 'package:bliu/screen/product/component/detail/product_body.dart';
+import 'package:bliu/screen/product/component/detail/product_info_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../_component/cart_screen.dart';
 import '../_component/search_screen.dart';
+import 'component/detail/product_ai.dart';
 import 'component/detail/product_banner.dart';
 import 'component/detail/product_info_before_order.dart';
 import 'component/detail/product_info_title.dart';
 import 'component/detail/product_inquiry.dart';
-
-
+import 'component/detail/product_review_list.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -59,12 +57,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 right: 4,
                 top: 20,
                 child: Container(
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(4),
+                  decoration: const BoxDecoration(
                     color: Colors.pinkAccent,
                     shape: BoxShape.circle,
                   ),
-                  child: Text(
+                  child: const Text(
                     '2',
                     style: TextStyle(
                       color: Colors.white,
@@ -77,17 +75,53 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          ProductBanner(), // 배너 위젯 추가
-          ProductInfoTitle(), // 타이틀 위젯 추가
-          ProductBody(), // 제품 정보 및 리뷰 위젯 추가
-          ProductAi(), // AI 관련 위젯 추가
-          ProductInfoBeforeOrder(), // 주문 전 정보 위젯 추가
-          ProductInquiry(), // 문의 위젯 추가
-        ],
+      body: DefaultTabController(
+        length: 2, // 두 개의 탭
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    ProductBanner(),
+                    ProductInfoTitle(),
+                  ],
+                ),
+              ),
+            ];
+          },
+          body: Column(
+            children: [
+              TabBar(
+                labelColor: Colors.black,
+                tabs: [
+                  Tab(text: '상세정보'),
+                  Tab(text: '리뷰(10)'),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    // 첫 번째 탭: 상세정보에 모든 정보 포함
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ProductInfoContent(),
+                          ProductAi(),
+                          ProductInfoBeforeOrder(),
+                          ProductInquiry(),
+                        ],
+                      ),
+                    ),
+                    // 두 번째 탭: 리뷰만 표시
+                     ProductReview(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-
