@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductInfoBeforeOrder extends StatelessWidget {
+  const ProductInfoBeforeOrder({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

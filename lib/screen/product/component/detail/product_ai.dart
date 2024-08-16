@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductAi extends StatefulWidget {
+  const ProductAi({super.key});
+
   @override
   _ProductAiState createState() => _ProductAiState();
 }

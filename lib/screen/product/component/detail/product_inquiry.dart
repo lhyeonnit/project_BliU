@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductInquiry extends StatefulWidget {
+  const ProductInquiry({super.key});
+
   @override
   _ProductInquiryState createState() => _ProductInquiryState();
 }

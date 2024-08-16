@@ -38,7 +38,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  SearchScreen()),
+                MaterialPageRoute(builder: (context) => SearchScreen()),
               );
             },
           ),
@@ -49,7 +49,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  CartScreen()),
+                    MaterialPageRoute(builder: (context) => CartScreen()),
                   );
                 },
               ),
@@ -75,40 +75,52 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          ProductBanner(),
-          ProductInfoTitle(),
-          const DefaultTabController(
-            length: 2, // 두 개의 탭
-            child: Column(
-              children: [
-                TabBar(
-                  labelColor: Colors.black,
-                  tabs: [
-                    Tab(text: '상세정보'),
-                    Tab(text: '리뷰(10)'),
+      body: DefaultTabController(
+        length: 2, // 두 개의 탭
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    ProductBanner(),
+                    ProductInfoTitle(),
                   ],
                 ),
-                SizedBox(
-                  height: 800, // TabBarView가 차지하는 공간을 고정
-                  child: TabBarView(
-                    children: [
-                      // 상품 내용 정보
-                      ProductInfoContent(),
-                      // 상품 리뷰
-                      ProductReview(),
-                    ],
-                  ),
+              ),
+            ];
+          },
+          body: Column(
+            children: [
+              TabBar(
+                labelColor: Colors.black,
+                tabs: [
+                  Tab(text: '상세정보'),
+                  Tab(text: '리뷰(10)'),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    // 첫 번째 탭: 상세정보에 모든 정보 포함
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ProductInfoContent(),
+                          ProductAi(),
+                          ProductInfoBeforeOrder(),
+                          ProductInquiry(),
+                        ],
+                      ),
+                    ),
+                    // 두 번째 탭: 리뷰만 표시
+                     ProductReview(),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          // 탭 아래에 추가되는 정보들
-          ProductAi(),
-          ProductInfoBeforeOrder(),
-          ProductInquiry(),
-        ],
+        ),
       ),
     );
   }
