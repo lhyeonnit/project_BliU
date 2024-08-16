@@ -1,3 +1,4 @@
+import 'package:bliu/screen/store/store_detail_screen.dart';
 import 'package:flutter/material.dart';
 import '../../home/component/home_body_best_sales_category.dart';
 import '../dummy/store_favorie.dart';
@@ -57,13 +58,12 @@ class _StoreFavoritePageState extends State<StoreFavoriePage> {
                   );
 
                   return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(), // 세로 스크롤 비활성화
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: displayedStores.length,
                     itemBuilder: (context, index) {
                       return ListTile(
                         leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              displayedStores[index]['logo']!),
+                          backgroundImage: AssetImage(displayedStores[index]['logo']!),
                         ),
                         title: Text(displayedStores[index]['name']!),
                         subtitle: Text(displayedStores[index]['description']!),
@@ -74,6 +74,14 @@ class _StoreFavoritePageState extends State<StoreFavoriePage> {
                             Text(displayedStores[index]['scrapCount']!),
                           ],
                         ),
+                        onTap: () {
+                          // Navigate to store_detail page when item is tapped
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => StoreDetailScreen(),
+                          )
+                          );
+                        },
                       );
                     },
                   );
@@ -133,7 +141,7 @@ class _StoreFavoritePageState extends State<StoreFavoriePage> {
                       children: [
                         AspectRatio(
                           aspectRatio: 1.0,
-                          child: Image.network(
+                          child: Image.asset(
                             product['image']!,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
