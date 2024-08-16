@@ -9,7 +9,7 @@ import 'component/detail/product_banner.dart';
 import 'component/detail/product_info_before_order.dart';
 import 'component/detail/product_info_title.dart';
 import 'component/detail/product_inquiry.dart';
-import 'component/detail/product_review.dart';
+import 'component/detail/product_review_list.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});

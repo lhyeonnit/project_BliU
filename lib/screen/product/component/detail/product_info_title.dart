@@ -1,3 +1,4 @@
+import 'package:bliu/screen/product/component/detail/coupon_receive_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductInfoTitle extends StatelessWidget {
@@ -18,7 +19,8 @@ class ProductInfoTitle extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle, // 이미지를 동그랗게 만들기
                   image: DecorationImage(
-                    image: AssetImage('assets/images/home/exhi.png'), // 실제 로고 이미지 경로로 변경
+                    image: AssetImage('assets/images/home/exhi.png'),
+                    // 실제 로고 이미지 경로로 변경
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -41,9 +43,11 @@ class ProductInfoTitle extends StatelessWidget {
                             children: [
                               Text(
                                 '밀크마일', // 브랜드명
-                                style: TextStyle(color: Colors.black, fontSize: 16),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
                               ),
-                              Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+                              Icon(Icons.arrow_forward_ios,
+                                  size: 16, color: Colors.black),
                             ],
                           ),
                         ),
@@ -108,7 +112,8 @@ class ProductInfoTitle extends StatelessWidget {
             height: 1,
             thickness: 1,
             color: Colors.grey[300],
-            indent: 5, // 왼쪽 여백
+            indent: 5,
+            // 왼쪽 여백
             endIndent: 5, // 오른쪽 여백
           ),
           SizedBox(height: 15), // 구분선과 배송비 정보 사이 간격
@@ -130,7 +135,9 @@ class ProductInfoTitle extends StatelessWidget {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black), // 화살표 아이콘
+                    Icon(Icons.arrow_forward_ios,
+                        size: 16, color: Colors.black),
+                    // 화살표 아이콘
                   ],
                 ),
                 Row(
@@ -139,11 +146,28 @@ class ProductInfoTitle extends StatelessWidget {
                       '쿠폰',
                       style: TextStyle(fontSize: 14, color: Colors.black),
                     ),
-                    SizedBox(width: 50),
-                    Expanded(
-                      child: Text(
-                        '쿠폰 다운로드',
-                        style: TextStyle(fontSize: 14, color: Colors.black),
+                    SizedBox(width: 35),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CouponReceiveScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 8),
+                          child: Text(
+                            '쿠폰 다운로드',
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -151,7 +175,6 @@ class ProductInfoTitle extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );

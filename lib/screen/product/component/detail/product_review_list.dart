@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'product_review_detail.dart';
 
-class ProductReview extends StatelessWidget {
+class ProductReview extends StatefulWidget {
   const ProductReview({super.key});
+  @override
+  _ProductReviewState createState() => _ProductReviewState();
+}
+
+class _ProductReviewState extends State<ProductReview> {
+  int currentPage = 1;
+  int totalPages = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -161,19 +168,27 @@ class ProductReview extends StatelessWidget {
             children: [
               IconButton(
                 icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  // 이전 페이지로 이동
-                },
+                onPressed: currentPage > 1
+                    ? () {
+                  setState(() {
+                    currentPage--;
+                  });
+                }
+                    : null,
               ),
               Text(
-                '01 / 10',
+                '${currentPage.toString().padLeft(2, '0')} / $totalPages',
                 style: TextStyle(fontSize: 16),
               ),
               IconButton(
                 icon: Icon(Icons.arrow_forward_ios),
-                onPressed: () {
-                  // 다음 페이지로 이동
-                },
+                onPressed: currentPage < totalPages
+                    ? () {
+                  setState(() {
+                    currentPage++;
+                  });
+                }
+                    : null,
               ),
             ],
           ),
