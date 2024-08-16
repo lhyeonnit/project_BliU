@@ -7,93 +7,71 @@ class ProductInfoContent extends StatefulWidget {
   _ProductInfoContentState createState() => _ProductInfoContentState();
 }
 
-class _ProductInfoContentState extends State<ProductInfoContent> {
+class _ProductInfoContentState extends State<ProductInfoContent> with TickerProviderStateMixin {
   bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 750,
+    return SingleChildScrollView(
+      // 페이지 전체를 스크롤 가능하게 만듦
       child: Padding(
-        padding: const EdgeInsets.only(right: 16, left: 16, top: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 내용 표시 부분
-            AnimatedContainer(
+            // 내용이 들어가는 영역
+            AnimatedSize(
               duration: const Duration(milliseconds: 300),
-              height: isExpanded ? null : 700, // 펼쳐지지 않았을 때 높이를 제한
-              child: SingleChildScrollView(
-                physics: isExpanded ? null : const NeverScrollableScrollPhysics(), // 펼쳐지기 전엔 스크롤 비활성화
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset('assets/images/product/item_dt.png'),
-                    const SizedBox(height: 16.0),
-                    const Text(
-                      "여기에 더 많은 상품 설명이 들어갑니다. 펼쳐진 상태에서 모든 내용을 볼 수 있습니다.",
-                    ),
-                    const SizedBox(height: 16.0),
-                    for (int i = 0; i < 20; i++) // 더 많은 텍스트를 추가하여 스크롤 가능하게 함
-                      const Text(
-                        "더 많은 설명 내용...",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                  ],
+              curve: Curves.easeInOut,
+              child: isExpanded
+                  ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/images/product/item_dt.png'),
+                  const SizedBox(height: 16.0),
+                  const Text(
+                    "밀크마일(MilkMile)은 유아와 어린이를 위한 의류 브랜드로, 높은 품질과 귀여운 디자인으로 많은 부모들의 사랑을 받고 있습니다. 밀크마일은 신생아부터 유아기까지의 아이들을 위한 다양한 의류 제품을 제공하며, 아이들의 편안함과 안전성을 최우선으로 고려한 제품을 제작합니다.",
+                  ),
+                  const SizedBox(height: 16.0),
+                  for (int i = 0; i < 20; i++)
+                    const Text("더 많은 설명 내용...", style: TextStyle(fontSize: 16)),
+                ],
+              )
+                  : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/images/product/item_dt.png'),
+                  const SizedBox(height: 16.0),
+                  const Text(
+                    "밀크마일(MilkMile)은 유아와 어린이를 위한 의류 브랜드로, 높은 품질과 귀여운 디자인으로 많은 부모들의 사랑을 받고 있습니다.",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            // 버튼
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isExpanded = !isExpanded;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black12),
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Colors.white,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  isExpanded ? "상품 정보 접기" : "상품 정보 펼쳐보기",
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ),
             ),
-            // 상품 정보 펼쳐보기 버튼
-            if (!isExpanded)
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isExpanded = true; // 펼쳐보기 버튼 클릭 시 스크롤 활성화
-                  });
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black12),
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.white,
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "상품 정보 펼쳐보기",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-            if (isExpanded)
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isExpanded = false; // 다시 접기
-                  });
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black12),
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.white,
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "상품 정보 접기",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
           ],
         ),
       ),
