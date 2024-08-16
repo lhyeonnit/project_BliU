@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'product_review_detail.dart';
+import 'report_screen.dart';
 
 class ProductReview extends StatefulWidget {
   const ProductReview({super.key});
@@ -143,6 +144,10 @@ class _ProductReviewState extends State<ProductReview> {
                     GestureDetector(
                       onTap: () {
                         // 신고 버튼 클릭시 동작
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ReportScreen()),
+                        );
                       },
                       child: Text(
                         '신고',
