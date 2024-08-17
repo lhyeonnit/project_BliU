@@ -1,8 +1,7 @@
-//스토어 상세
 import 'package:bliu/screen/store/component/detail/store_category.dart';
 import 'package:bliu/screen/store/component/detail/store_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StoreDetailScreen extends StatelessWidget {
   const StoreDetailScreen({super.key});
@@ -20,12 +19,15 @@ class StoreDetailScreen extends StatelessWidget {
           },
         ),
       ),
-      body: ListView(
-        children: [
-          StoreInfoPage(),
-          const SizedBox(height: 16),
-          StoreCategory(),
-        ],
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
+              child: StoreInfoPage(), // 상단 고정된 컨텐츠
+            ),
+          ];
+        },
+        body: StoreCategory(), // 내부 스크롤 가능한 카테고리 및 그리드뷰
       ),
     );
   }
