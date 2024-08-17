@@ -164,6 +164,7 @@ class _ProductListScreenState extends State<ProductListScreen>
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: Colors.black,
+                tabAlignment: TabAlignment.start,
                 tabs: [
                   Tab(text: '전체'),
                   Tab(text: '자켓'),

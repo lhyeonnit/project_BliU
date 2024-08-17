@@ -44,6 +44,7 @@ class _StorePageState extends State<StorePage> with SingleTickerProviderStateMix
           indicatorColor: Colors.black,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
+
         ),
       ),
       body:TabBarView(

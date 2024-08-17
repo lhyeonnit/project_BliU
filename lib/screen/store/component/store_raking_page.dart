@@ -74,42 +74,64 @@ class _StoreRakingPageState extends State<StoreRakingPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 16.0, top: 16),
             child: Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
+                // 연령 버튼
+                Flexible(
+                  child: OutlinedButton(
                     onPressed: _showAgeGroupSelection,
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.white, // 배경 흰색
+                      side: BorderSide(color: Colors.grey), // 테두리 회색
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min, // 텍스트에 맞게 크기 조정
                       children: [
-                        Expanded(
+                        Flexible(
                           child: Text(
                             getSelectedAgeGroupsText(),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
+                            style: TextStyle(color: Colors.black), // 글자색 검은색
                           ),
                         ),
-                        const Icon(Icons.arrow_drop_down),
+                        const SizedBox(width: 4.0),
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
+                        // 아이콘도 검은색
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(width: 8.0),
-                Expanded(
-                  child: ElevatedButton(
+                // 스타일 버튼
+                Flexible(
+                  child: OutlinedButton(
                     onPressed: _showStyleSelection,
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.white, // 배경 흰색
+                      side: BorderSide(color: Colors.grey), // 테두리 회색
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min, // 텍스트에 맞게 크기 조정
                       children: [
-                        Expanded(
+                        Flexible(
                           child: Text(
                             getSelectedStylesText(),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
+                            style: TextStyle(color: Colors.black), // 글자색 검은색
                           ),
                         ),
-                        const Icon(Icons.arrow_drop_down),
+                        const SizedBox(width: 4.0),
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
+                        // 아이콘도 검은색
                       ],
                     ),
                   ),
@@ -139,20 +161,19 @@ class _StoreRakingPageState extends State<StoreRakingPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               '${stores[index]['rank']}',
                               style: TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.bold),
+                                fontSize: 29,
+                              ),
                             ),
-                            SizedBox(width: 8),
-                            CircleAvatar(
-                              backgroundImage:
-                                  AssetImage(stores[index]['logo']),
-                              radius: 20,
+                            Image.asset(
+                              'assets/images/store/brand_logo.png',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.contain,
                             ),
-                            SizedBox(width: 8),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,27 +195,31 @@ class _StoreRakingPageState extends State<StoreRakingPage> {
                             ),
                             Column(
                               children: [
-                                IconButton(
-                                  icon: SvgPicture.asset(
-                                    'assets/images/store/book_mark.svg',
-                                    width: 15,  // 원하는 크기로 설정
-                                    height: 15, // 원하는 크기로 설정
+                                GestureDetector(
+                                  onTap: () {
+                                    // 여기에 onTap 동작을 추가하세요.
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      width: 17,
+                                      height: 17,
+                                      child: SvgPicture.asset(
+                                        'assets/images/store/book_mark.svg',
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
                                   ),
-                                  onPressed: () {},
-                                  padding: EdgeInsets.zero, // 패딩 제거
-                                  constraints: BoxConstraints(), // 기본 크기 제한 제거
                                 ),
                                 Text(
-                                  stores[index]['scrapCount'],
+                                  stores[index]['scrapCount']!,
                                   style: TextStyle(color: Colors.grey),
                                 ),
                               ],
                             ),
-
                           ],
                         ),
 
-                        SizedBox(height: 10),
                         // Add space between rows and image carousel
                         Container(
                           height: 120,
@@ -209,25 +234,12 @@ class _StoreRakingPageState extends State<StoreRakingPage> {
                                   child: Image.asset(
                                     stores[index]['images'][imageIndex],
                                     fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                        color: Colors.grey[200],
-                                        child: Center(
-                                          child: Text(
-                                            'Image not available',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                        ),
-                                      );
-                                    },
                                   ),
                                 ),
                               );
                             },
                           ),
                         ),
-                        Divider(),
                       ],
                     ),
                   ),
