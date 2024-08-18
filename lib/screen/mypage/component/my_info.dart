@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
+import 'my_info_edit_check.dart';
+import 'my_info_edit_screen.dart';
 
 class MyInfo extends StatelessWidget {
   const MyInfo({super.key});
@@ -34,7 +36,15 @@ class MyInfo extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyInfoEditCheck(),
+                ),
+              );
+
+            },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

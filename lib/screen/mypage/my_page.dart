@@ -1,3 +1,4 @@
+import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/mypage/component/my_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,29 +23,29 @@ class MyPage extends StatelessWidget {
             children: [
               IconButton(
                 padding: EdgeInsets.only(right: 10),
-                icon: SvgPicture.asset('assets/images/my/ic_cart.svg'),
-                onPressed: () {},
+                icon: SvgPicture.asset("assets/images/product/ic_cart.svg"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartScreen()),
+                  );
+                },
               ),
               Positioned(
-                right: 13,
-                top: 25,
+                right: 10,
+                top: 20,
                 child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  constraints: const BoxConstraints(
-                    minWidth: 12,
-                    minHeight: 12,
+                  padding: const EdgeInsets.all(4),
+                  decoration: const BoxDecoration(
+                    color: Colors.pinkAccent,
+                    shape: BoxShape.circle,
                   ),
                   child: const Text(
                     '2',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 8,
+                      fontSize: 12,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
