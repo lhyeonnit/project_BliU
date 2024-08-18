@@ -44,25 +44,32 @@ class ProductInfoBeforeOrder extends StatelessWidget {
         ),
 
         // 교환/반품 안내 섹션
-        ExpansionTile(
-          title: const Text('교환/반품 안내', style: TextStyle(fontWeight: FontWeight.bold),),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+        Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent), // 선 제거
+          child: ExpansionTile(
+            title: const Text(
+              '교환/반품 안내',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            children: [
+              Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: const Text(
-                  '교환/반품은 상품 수령 후 7일 이내 가능합니다. 단, 포장이 훼손된 경우 교환/반품이 불가합니다.',
-                  style: TextStyle(fontSize: 14),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  padding: const EdgeInsets.all(16.0),
+                  child: const Text(
+                    '교환/반품은 상품 수령 후 7일 이내 가능합니다. 단, 포장이 훼손된 경우 교환/반품이 불가합니다.',
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        )
+
       ],
     );
   }

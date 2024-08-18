@@ -1,3 +1,4 @@
+import 'package:bliu/screen/mypage/my_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -255,6 +256,10 @@ class _RecommendEditState extends State<RecommendEdit> {
                 ElevatedButton(
                   onPressed: () {
                     // 확인 버튼 동작
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyPage()),
+                    );
                   },
                   child: Text('확인'),
                   style: ElevatedButton.styleFrom(

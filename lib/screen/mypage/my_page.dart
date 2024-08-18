@@ -1,4 +1,5 @@
 import 'package:bliu/screen/_component/cart_screen.dart';
+import 'package:bliu/screen/mypage/component/faq_screen.dart';
 import 'package:bliu/screen/mypage/component/my_info.dart';
 import 'package:bliu/screen/mypage/component/recommend_edit.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,10 @@ class MyPage extends StatelessWidget {
           }),
           SizedBox(height: 30),
           _buildSection('고객서비스'),
-          _buildSectionItem('FAQ', () {}),
+          _buildSectionItem('FAQ', () {Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => FAQScreen()),
+          );}),
           _buildSectionItem('공지사항', () {}),
           _buildSectionItem('고객센터', () {}),
           _buildSectionItem('설정', () {}),
