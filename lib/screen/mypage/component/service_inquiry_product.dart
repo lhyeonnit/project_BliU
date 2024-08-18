@@ -1,3 +1,4 @@
+import 'package:bliu/screen/mypage/component/inquiry_product_detail.dart';
 import 'package:flutter/material.dart';
 
 class ServiceInquiryProduct extends StatefulWidget {
@@ -68,7 +69,13 @@ class _ServiceInquiryProductState extends State<ServiceInquiryProduct> {
                   subtitle: Text(currentItems[index]['title']!,
                       style: const TextStyle(color: Colors.black)),
                   onTap: () {
-                    // 공지사항 상세 페이지로 이동
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InquiryProductDetail(),
+                      ),
+                    );
+
                   },
                 );
               },
