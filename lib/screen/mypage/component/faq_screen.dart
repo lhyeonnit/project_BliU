@@ -95,7 +95,7 @@ class _FAQScreenState extends State<FAQScreen> {
           ),
           Container(
             height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
@@ -103,7 +103,7 @@ class _FAQScreenState extends State<FAQScreen> {
                 final bool isSelected = selectedCategoryIndex == index;
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
                   child: FilterChip(
                     label: Text(
                       categories[index],
@@ -131,16 +131,19 @@ class _FAQScreenState extends State<FAQScreen> {
               },
             ),
           ),
-
+          SizedBox(height: 20),
+          Container(
+            width: double.infinity,
+            color: Color(0xFFF5F9F9), // 색상 적용
+            height: 10,
+          ),
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               itemCount: getFilteredFAQData().length,
               itemBuilder: (context, index) {
                 final faq = getFilteredFAQData()[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Theme(
+                return Theme(
                     data: Theme.of(context).copyWith(dividerColor: Colors.transparent), // 선 제거
                     child: ExpansionTile(
                       tilePadding: EdgeInsets.zero,
@@ -197,8 +200,7 @@ class _FAQScreenState extends State<FAQScreen> {
                         ),
                       ],
                     ),
-                  ),
-                );
+                  );
               },
             ),
           ),

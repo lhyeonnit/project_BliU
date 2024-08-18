@@ -1,6 +1,7 @@
 import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/mypage/component/faq_screen.dart';
 import 'package:bliu/screen/mypage/component/my_info.dart';
+import 'package:bliu/screen/mypage/component/notice_screen.dart';
 import 'package:bliu/screen/mypage/component/recommend_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,7 +79,7 @@ class MyPage extends StatelessWidget {
           SizedBox(height: 20),
           Container(
             width: double.infinity,
-            color: Colors.grey,
+            color: Color(0xFFF5F9F9), // 색상 적용
             height: 10,
           ),
           SizedBox(height: 30),
@@ -91,11 +92,18 @@ class MyPage extends StatelessWidget {
           }),
           SizedBox(height: 30),
           _buildSection('고객서비스'),
-          _buildSectionItem('FAQ', () {Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => FAQScreen()),
-          );}),
-          _buildSectionItem('공지사항', () {}),
+          _buildSectionItem('FAQ', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FAQScreen()),
+            );
+          }),
+          _buildSectionItem('공지사항', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NoticeScreen()),
+            );
+          }),
           _buildSectionItem('고객센터', () {}),
           _buildSectionItem('설정', () {}),
           Padding(
