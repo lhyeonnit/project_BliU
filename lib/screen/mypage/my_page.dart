@@ -3,6 +3,7 @@ import 'package:bliu/screen/mypage/component/faq_screen.dart';
 import 'package:bliu/screen/mypage/component/my_info.dart';
 import 'package:bliu/screen/mypage/component/notice_screen.dart';
 import 'package:bliu/screen/mypage/component/recommend_edit.dart';
+import 'package:bliu/screen/mypage/component/service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -72,7 +73,7 @@ class MyPage extends StatelessWidget {
                 _buildIconButton(
                     '쿠폰함', 'assets/images/my/mypage_ic03_1.svg', () {}, '2'),
                 _buildIconButton('포인트', 'assets/images/my/mypage_ic04.svg',
-                    () {}, '200,000'),
+                        () {}, '200,000'),
               ],
             ),
           ),
@@ -104,7 +105,12 @@ class MyPage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => NoticeScreen()),
             );
           }),
-          _buildSectionItem('고객센터', () {}),
+          _buildSectionItem('고객센터', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ServiceScreen()),
+            );
+          }),
           _buildSectionItem('설정', () {}),
           Padding(
             padding: const EdgeInsets.only(left: 4.0),
@@ -112,7 +118,7 @@ class MyPage extends StatelessWidget {
                 child: Text(
                   '로그아웃',
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.w500),
                 ),
@@ -123,8 +129,8 @@ class MyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildIconButton(
-      String label, String icon, VoidCallback onPressed, String num) {
+  Widget _buildIconButton(String label, String icon, VoidCallback onPressed,
+      String num) {
     return Column(
       children: [
         IconButton(
@@ -161,19 +167,26 @@ class MyPage extends StatelessWidget {
   }
 
   Widget _buildSectionItem(String title, VoidCallback onPressed) {
-    return GestureDetector(
+    return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-        // 원하는 간격을 설정
+        padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 16), // 최소한의 간격으로 조절 가능
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 14),
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.black,
+              size: 16,
+            ),
           ],
         ),
       ),
