@@ -1,5 +1,6 @@
 import 'package:bliu/screen/_component/cart_screen.dart';
 import 'package:bliu/screen/mypage/component/my_info.dart';
+import 'package:bliu/screen/mypage/component/recommend_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,7 +82,12 @@ class MyPage extends StatelessWidget {
           ),
           SizedBox(height: 30),
           _buildSection('쇼핑정보'),
-          _buildSectionItem('추천정보관리', () {}),
+          _buildSectionItem('추천정보관리', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RecommendEdit()),
+            );
+          }),
           SizedBox(height: 30),
           _buildSection('고객서비스'),
           _buildSectionItem('FAQ', () {}),

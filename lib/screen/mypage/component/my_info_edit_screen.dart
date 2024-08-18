@@ -274,6 +274,17 @@ class _MyInfoEditScreenState extends State<MyInfoEditScreen> {
                   ),
                 ],
               ),
+              Center(
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    '회원탈퇴',
+                    style: TextStyle(color: Colors.grey),
+                    textAlign: TextAlign.center, // 텍스트 가운데 정렬
+                  ),
+                ),
+              ),
+
               SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
