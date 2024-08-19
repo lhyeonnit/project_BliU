@@ -1,4 +1,6 @@
-import 'package:bliu/screen/mypage/component/service_my_inquiry.dart';
+import 'package:bliu/screen/mypage/component/bottom/inquiry_service.dart';
+import 'package:bliu/screen/mypage/component/bottom/inquiry_store.dart';
+import 'package:bliu/screen/mypage/component/bottom/service_my_inquiry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -37,7 +39,7 @@ class ServiceScreen extends StatelessWidget {
               () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ServiceMyInquiryScreen()),
+                  MaterialPageRoute(builder: (context) => InquiryStore()),
                 );
               },
             ),
@@ -46,7 +48,7 @@ class ServiceScreen extends StatelessWidget {
               () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ServiceMyInquiryScreen()),
+                  MaterialPageRoute(builder: (context) => InquiryService()),
                 );
               },
             ),

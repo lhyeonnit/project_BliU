@@ -67,7 +67,7 @@ class InquiryProductDetail extends StatelessWidget {
             // 문의 상태와 내용
             Row(
               children: [
-                const Text(
+                Text(
                   '답변완료',
                   style: TextStyle(
                     fontSize: 16,
@@ -75,11 +75,15 @@ class InquiryProductDetail extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                const Text(
-                  '2024.04.14',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
+                SizedBox(width: 10,),
+                Container(
+                  margin: EdgeInsets.only(top: 3),
+                  child: Text(
+                    '2024.04.14',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               ],
@@ -153,7 +157,7 @@ class InquiryProductDetail extends StatelessWidget {
                   'assets/images/store/brand_logo.png', // 실제 브랜드 로고 경로로 변경
                   width: 70,
                   height: 70,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitHeight,
                 ),
                 Container(
                   child: Column(

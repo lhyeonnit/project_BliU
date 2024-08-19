@@ -2,8 +2,8 @@ import 'package:bliu/screen/mypage/my_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../common/component/date_bottom.dart';
-import '../../common/dummy/favorite_styles.dart';
+import '../../../common/component/date_bottom.dart';
+import '../../../common/dummy/favorite_styles.dart';
 
 class RecommendEdit extends StatefulWidget {
   const RecommendEdit({super.key});

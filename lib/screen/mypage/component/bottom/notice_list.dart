@@ -1,4 +1,4 @@
-import 'package:bliu/screen/mypage/component/notice_detail.dart';
+import 'package:bliu/screen/mypage/component/bottom/notice_detail.dart';
 import 'package:flutter/material.dart';
 
 class NoticeList extends StatelessWidget {

@@ -1,17 +1,16 @@
-import 'package:bliu/screen/mypage/component/event_list.dart';
+import 'package:bliu/screen/mypage/component/bottom/service_inquiry_one.dart';
+import 'package:bliu/screen/mypage/component/bottom/service_inquiry_product.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import 'notice_list.dart';
-
-class NoticeScreen extends StatefulWidget {
-  const NoticeScreen({super.key});
+class ServiceMyInquiryScreen extends StatefulWidget {
+  const ServiceMyInquiryScreen({Key? key}) : super(key: key);
 
   @override
-  _NoticeScreenState createState() => _NoticeScreenState();
+  _ServiceMyInquiryScreenState createState() => _ServiceMyInquiryScreenState();
 }
 
-class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderStateMixin {
+class _ServiceMyInquiryScreenState extends State<ServiceMyInquiryScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -25,14 +24,13 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
     _tabController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
-          '공지사항',
+          '문의내역',
           style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
@@ -47,16 +45,16 @@ class _NoticeScreenState extends State<NoticeScreen> with SingleTickerProviderSt
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
           tabs: const [
-            Tab(text: '일반'),
-            Tab(text: '이벤트'),
+            Tab(text: '상품 문의내역'),
+            Tab(text: '1:1 문의내역'),
           ],
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
-          NoticeList(),
-          EventList(), // 이벤트 탭 내용은 필요에 따라 채워 넣으세요.
+          ServiceInquiryProduct(),
+          ServiceInquiryOne(),
         ],
       ),
     );

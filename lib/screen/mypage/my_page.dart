@@ -1,12 +1,14 @@
 import 'package:bliu/screen/_component/cart_screen.dart';
-import 'package:bliu/screen/mypage/component/faq_screen.dart';
-import 'package:bliu/screen/mypage/component/my_info.dart';
-import 'package:bliu/screen/mypage/component/notice_screen.dart';
-import 'package:bliu/screen/mypage/component/recommend_edit.dart';
-import 'package:bliu/screen/mypage/component/service_screen.dart';
+import 'package:bliu/screen/mypage/component/bottom/faq_screen.dart';
+import 'package:bliu/screen/mypage/component/bottom/setting_screen.dart';
+import 'package:bliu/screen/mypage/component/top/my_info.dart';
+import 'package:bliu/screen/mypage/component/bottom/recommend_edit.dart';
+import 'package:bliu/screen/mypage/component/bottom/service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'component/bottom/notice_screen.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({super.key});
@@ -111,7 +113,12 @@ class MyPage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => ServiceScreen()),
             );
           }),
-          _buildSectionItem('설정', () {}),
+          _buildSectionItem('설정', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SettingScreen()),
+            );
+          }),
           Padding(
             padding: const EdgeInsets.only(left: 4.0),
             child: TextButton(
