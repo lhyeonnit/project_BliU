@@ -165,7 +165,7 @@ class _StoreRakingPageState extends State<StoreRakingPage> {
                             Text(
                               '${stores[index]['rank']}',
                               style: TextStyle(
-                                fontSize: 29,
+                                fontSize: 24,
                               ),
                             ),
                             Image.asset(

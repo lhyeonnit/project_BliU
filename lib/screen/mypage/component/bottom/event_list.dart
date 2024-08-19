@@ -1,5 +1,5 @@
-import 'package:bliu/screen/mypage/component/event_detail.dart';
-import 'package:bliu/screen/mypage/component/notice_detail.dart';
+import 'package:bliu/screen/mypage/component/bottom/event_detail.dart';
+import 'package:bliu/screen/mypage/component/bottom/notice_detail.dart';
 import 'package:flutter/material.dart';
 
 class EventList extends StatelessWidget {

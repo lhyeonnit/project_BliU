@@ -1,4 +1,4 @@
-import 'package:bliu/screen/mypage/component/my_info_edit_screen.dart';
+import 'package:bliu/screen/mypage/component/top/my_info_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -1,13 +1,14 @@
+import 'package:bliu/screen/mypage/component/bottom/inquiry_product_detail.dart';
 import 'package:flutter/material.dart';
 
-class ServiceInquiryOne extends StatefulWidget {
-  const ServiceInquiryOne({Key? key}) : super(key: key);
+class ServiceInquiryProduct extends StatefulWidget {
+  const ServiceInquiryProduct({Key? key}) : super(key: key);
 
   @override
-  _ServiceInquiryOneState createState() => _ServiceInquiryOneState();
+  _ServiceInquiryProductState createState() => _ServiceInquiryProductState();
 }
 
-class _ServiceInquiryOneState extends State<ServiceInquiryOne> {
+class _ServiceInquiryProductState extends State<ServiceInquiryProduct> {
   int currentPage = 1;
   final int itemsPerPage = 5; // 한 페이지에 보여줄 항목 수
 
@@ -68,7 +69,13 @@ class _ServiceInquiryOneState extends State<ServiceInquiryOne> {
                   subtitle: Text(currentItems[index]['title']!,
                       style: const TextStyle(color: Colors.black)),
                   onTap: () {
-                    // 공지사항 상세 페이지로 이동
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InquiryProductDetail(),
+                      ),
+                    );
+
                   },
                 );
               },
